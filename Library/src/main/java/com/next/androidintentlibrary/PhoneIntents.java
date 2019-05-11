@@ -23,7 +23,7 @@ public class PhoneIntents
 		this.context = context;
 	}
 
-	public PhoneIntents from(@NonNull Context context)
+	public static PhoneIntents from(@NonNull Context context)
 	{
 		return new PhoneIntents(context);
 	}

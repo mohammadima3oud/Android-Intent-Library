@@ -22,7 +22,7 @@ public class MarketIntents
 		this.context = context;
 	}
 
-	public MarketIntents from(@NonNull Context context)
+	public static MarketIntents from(@NonNull Context context)
 	{
 		return new MarketIntents(context);
 	}

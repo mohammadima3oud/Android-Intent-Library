@@ -16,7 +16,7 @@ public class CalculatorIntents
 		this.context = context;
 	}
 
-	public CalculatorIntents from(@NonNull Context context)
+	public static CalculatorIntents from(@NonNull Context context)
 	{
 		return new CalculatorIntents(context);
 	}

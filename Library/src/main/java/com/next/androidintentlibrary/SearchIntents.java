@@ -18,7 +18,7 @@ public class SearchIntents
 		this.context = context;
 	}
 
-	public SearchIntents from(@NonNull Context context)
+	public static SearchIntents from(@NonNull Context context)
 	{
 		return new SearchIntents(context);
 	}

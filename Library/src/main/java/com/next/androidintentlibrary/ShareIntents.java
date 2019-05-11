@@ -18,7 +18,7 @@ public class ShareIntents
 		this.context = context;
 	}
 
-	public ShareIntents from(@NonNull Context context)
+	public static ShareIntents from(@NonNull Context context)
 	{
 		return new ShareIntents(context);
 	}

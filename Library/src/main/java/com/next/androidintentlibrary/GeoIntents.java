@@ -21,7 +21,7 @@ public class GeoIntents
 		this.context = context;
 	}
 
-	public GeoIntents from(@NonNull Context context)
+	public static GeoIntents from(@NonNull Context context)
 	{
 		return new GeoIntents(context);
 	}

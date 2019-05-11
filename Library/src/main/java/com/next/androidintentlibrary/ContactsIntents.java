@@ -22,7 +22,7 @@ public class ContactsIntents
 		this.context = context;
 	}
 
-	public ContactsIntents from(@NonNull Context context)
+	public static ContactsIntents from(@NonNull Context context)
 	{
 		return new ContactsIntents(context);
 	}

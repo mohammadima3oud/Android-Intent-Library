@@ -16,7 +16,7 @@ public class CalendarIntents
 		this.context = context;
 	}
 
-	public CalendarIntents from(@NonNull Context context)
+	public static CalendarIntents from(@NonNull Context context)
 	{
 		return new CalendarIntents(context);
 	}

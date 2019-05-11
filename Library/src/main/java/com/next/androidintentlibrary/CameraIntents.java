@@ -26,7 +26,7 @@ public class CameraIntents
 		this.context = context;
 	}
 
-	public CameraIntents from(@NonNull Context context)
+	public static CameraIntents from(@NonNull Context context)
 	{
 		return new CameraIntents(context);
 	}

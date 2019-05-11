@@ -24,7 +24,7 @@ public class MediaIntents
 		this.context = context;
 	}
 
-	public MediaIntents from(@NonNull Context context)
+	public static MediaIntents from(@NonNull Context context)
 	{
 		return new MediaIntents(context);
 	}

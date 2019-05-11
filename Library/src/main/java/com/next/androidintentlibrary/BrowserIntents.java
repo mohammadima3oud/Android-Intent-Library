@@ -20,7 +20,7 @@ public class BrowserIntents
 		this.context = context;
 	}
 
-	public BrowserIntents from(@NonNull Context context)
+	public static BrowserIntents from(@NonNull Context context)
 	{
 		return new BrowserIntents(context);
 	}

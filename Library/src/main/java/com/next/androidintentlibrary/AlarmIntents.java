@@ -51,7 +51,7 @@ public class AlarmIntents
 		this.context = context;
 	}
 
-	public AlarmIntents from(@NonNull Context context)
+	public static AlarmIntents from(@NonNull Context context)
 	{
 		return new AlarmIntents(context);
 	}

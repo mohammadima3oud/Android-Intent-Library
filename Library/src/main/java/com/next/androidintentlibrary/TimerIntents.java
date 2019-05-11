@@ -19,7 +19,7 @@ public class TimerIntents
 		this.context = context;
 	}
 
-	public TimerIntents from(@NonNull Context context)
+	public static TimerIntents from(@NonNull Context context)
 	{
 		return new TimerIntents(context);
 	}

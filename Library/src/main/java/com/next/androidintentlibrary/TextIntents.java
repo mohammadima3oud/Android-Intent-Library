@@ -19,7 +19,7 @@ public class TextIntents
 		this.context = context;
 	}
 
-	public TextIntents from(@NonNull Context context)
+	public static TextIntents from(@NonNull Context context)
 	{
 		return new TextIntents(context);
 	}
