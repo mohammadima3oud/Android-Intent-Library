@@ -58,7 +58,7 @@ startActivity(SettingIntents.from(this).applicationSetting().build());
   ```Java
   BrowserIntents.from(this).openBrowser().show();
   ```
-* ### CalculatorIntents(TODO)
+* ### CalculatorIntents
   ```Java
   openCalculator()
   ```
@@ -67,8 +67,31 @@ startActivity(SettingIntents.from(this).applicationSetting().build());
   CalculatorIntents.from(this).openCalculator().show();
   ```
 * ### CalendarIntents
+  ```Java
+  openCalendar()
+  createEvent(String title, String description)
+  ```
+  Example
+  ```Java
+  CalendarIntents.from(this).openCalendar().show();
+  ```
 * ### CameraIntents
 * ### ContactIntents
+  ```Java
+  openContacts()
+  viewContact(String name)
+  editContact(String name)
+  editContact(String name, String newEmail)
+  insertContact(String name, String phone, String email, String company, String job, String notes)
+  pickContact()
+  ```
+  Example
+  ```Java
+  ContactIntents.from(this).openContacts().show();
+  ContactIntents.from(this).viewContact("Ahmad").show();
+  ContactIntents.from(this).insertContact("Emiley", "0913234235", "", "", "", "").show();
+  ContactIntents.from(this).editContact("Ahmad").show();
+  ```
 * ### EmailIntents
 * ### EventIntents
 * ### FileIntents
