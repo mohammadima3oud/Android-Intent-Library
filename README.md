@@ -15,7 +15,7 @@ And add the library to your module **build.gradle**:
 
 ```Gradle
 dependencies {
-    implementation 'com.github.ma3udmohammadi:Android-Intent-Library:0.2.1'
+    implementation 'com.github.ma3udmohammadi:Android-Intent-Library:0.2.2'
 }
 ```
 
