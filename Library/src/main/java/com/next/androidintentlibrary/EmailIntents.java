@@ -5,6 +5,7 @@ import android.content.ActivityNotFoundException;
 import android.content.Context;
 import android.content.Intent;
 import android.net.Uri;
+
 import androidx.annotation.NonNull;
 
 import java.util.ArrayList;
@@ -62,33 +63,6 @@ public class EmailIntents
 		return this;
 	}
 
-	public Intent build()
-	{
-		return intent;
-	}
-
-	private void startActivity(Intent intent)
-	{
-		if (!(context instanceof Activity))
-		{
-			intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-		}
-		context.startActivity(intent);
-	}
-
-	public boolean show()
-	{
-		Intent emailIntent = build();
-		try
-		{
-			startActivity(emailIntent);
-		} catch (ActivityNotFoundException e)
-		{
-			return false;
-		}
-		return true;
-	}
-
 	public EmailIntents composeAnEmailSend(String[] addresses, String[] cc, String[] bcc, String subject, String extraText, Uri attachment)
 	{
 		intent = new Intent(Intent.ACTION_SEND);
@@ -131,5 +105,24 @@ public class EmailIntents
 		intent.putExtra(Intent.EXTRA_TEXT, extraText);
 		intent.putExtra(EXTRA_STREAM, attachment);
 		return this;
+	}
+
+	public Intent build()
+	{
+		return intent;
+	}
+
+	private void startActivity(Intent intent)
+	{
+		if (!(context instanceof Activity))
+		{
+			intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+		}
+		context.startActivity(intent);
+	}
+
+	public void show()
+	{
+		startActivity(build());
 	}
 }

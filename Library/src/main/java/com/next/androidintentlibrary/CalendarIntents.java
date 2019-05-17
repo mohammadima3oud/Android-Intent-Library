@@ -1,9 +1,9 @@
 package com.next.androidintentlibrary;
 
 import android.app.Activity;
-import android.content.ActivityNotFoundException;
 import android.content.Context;
 import android.content.Intent;
+
 import androidx.annotation.NonNull;
 
 public class CalendarIntents
@@ -11,7 +11,7 @@ public class CalendarIntents
 	private Context context;
 	private Intent intent;
 
-	CalendarIntents(Context context)
+	private CalendarIntents(Context context)
 	{
 		this.context = context;
 	}
@@ -21,7 +21,7 @@ public class CalendarIntents
 		return new CalendarIntents(context);
 	}
 
-	public CalendarIntents openCalendarIntent()
+	public CalendarIntents openCalendar()
 	{
 		intent = new Intent();
 		intent.setAction(Intent.ACTION_MAIN);
@@ -30,15 +30,12 @@ public class CalendarIntents
 		return this;
 	}
 
-	public CalendarIntents calendarIntent()
+	public CalendarIntents createEvent(String title, String description)
 	{
 		intent = new Intent(Intent.ACTION_EDIT);
 		intent.setType("vnd.android.cursor.item/event");
-		intent.putExtra("title", "Some title");
-		intent.putExtra("description", "Some description");
-		intent.putExtra("beginTime", 5000);
-		intent.putExtra("endTime", 5000);
-
+		intent.putExtra("title", title);
+		intent.putExtra("description", description);
 		return this;
 	}
 
@@ -56,16 +53,8 @@ public class CalendarIntents
 		context.startActivity(intent);
 	}
 
-	public boolean show()
+	public void show()
 	{
-		Intent calendarIntent = build();
-		try
-		{
-			startActivity(calendarIntent);
-		} catch (ActivityNotFoundException e)
-		{
-			return false;
-		}
-		return true;
+		startActivity(build());
 	}
 }

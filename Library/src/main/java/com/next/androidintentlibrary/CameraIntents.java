@@ -9,8 +9,10 @@ import android.content.pm.PackageManager;
 import android.content.pm.ResolveInfo;
 import android.net.Uri;
 import android.provider.MediaStore;
+
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+
 import android.widget.Toast;
 
 import java.io.File;
@@ -21,7 +23,7 @@ public class CameraIntents
 	private Context context;
 	private Intent intent;
 
-	CameraIntents(Context context)
+	private CameraIntents(Context context)
 	{
 		this.context = context;
 	}
@@ -104,7 +106,7 @@ public class CameraIntents
 		return intent;
 	}
 
-	public static boolean isIntentAvailable(Context context, Intent intent)
+	private static boolean isIntentAvailable(Context context, Intent intent)
 	{
 		PackageManager packageManager = context.getPackageManager();
 		List<ResolveInfo> list = packageManager.queryIntentActivities(intent, PackageManager.MATCH_DEFAULT_ONLY);
@@ -125,17 +127,9 @@ public class CameraIntents
 		context.startActivity(intent);
 	}
 
-	public boolean show()
+	public void show()
 	{
-		Intent cameraIntent = build();
-		try
-		{
-			startActivity(cameraIntent);
-		} catch (ActivityNotFoundException e)
-		{
-			return false;
-		}
-		return true;
+		startActivity(build());
 	}
 
 	public static final int REQUEST_IMAGE_CAPTURE = 1;

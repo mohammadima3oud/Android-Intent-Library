@@ -1,17 +1,25 @@
 package com.next.androidintentlibrary;
 
 import android.app.Activity;
-import android.content.ActivityNotFoundException;
 import android.content.Context;
 import android.content.Intent;
+import android.content.pm.PackageInfo;
+import android.content.pm.PackageManager;
+
 import androidx.annotation.NonNull;
+
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
 
 public class CalculatorIntents
 {
 	private Context context;
 	private Intent intent;
+	private ArrayList<HashMap<String, Object>> items;
+	private PackageManager packageManager;
 
-	CalculatorIntents(Context context)
+	private CalculatorIntents(Context context)
 	{
 		this.context = context;
 	}
@@ -21,13 +29,44 @@ public class CalculatorIntents
 		return new CalculatorIntents(context);
 	}
 
-	public CalculatorIntents openCalculatorIntent()
+	// TODO: implement for AppIntents, use same code for other common apps.
+	public CalculatorIntents openCalculator()
 	{
+		getAllPackageNames();
 		intent = new Intent();
-		intent.setAction(Intent.ACTION_MAIN);
-		intent.addCategory(Intent.CATEGORY_APP_CALCULATOR);
-		intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+		int d = 0;
+		if (items.size() >= 1)
+		{
+			for (int j = 0; j < items.size(); j++)
+			{
+				String AppName = (String) items.get(j).get("appName");
+				// Log.w("Name",""+AppName);
+				if (AppName.matches("Calculator"))
+				{
+					d = j;
+					break;
+				}
+			}
+			String packageName = (String) items.get(d).get("packageName");
+			intent = packageManager.getLaunchIntentForPackage(packageName);
+		}
 		return this;
+	}
+
+	private void getAllPackageNames()
+	{
+		items = new ArrayList<>();
+		List<PackageInfo> packageInfos;
+
+		packageManager = context.getPackageManager();
+		packageInfos = packageManager.getInstalledPackages(0);
+		for (PackageInfo pi : packageInfos)
+		{
+			HashMap<String, Object> map = new HashMap<String, Object>();
+			map.put("appName", pi.applicationInfo.loadLabel(packageManager));
+			map.put("packageName", pi.packageName);
+			items.add(map);
+		}
 	}
 
 	public Intent build()
@@ -44,16 +83,8 @@ public class CalculatorIntents
 		context.startActivity(intent);
 	}
 
-	public boolean show()
+	public void show()
 	{
-		Intent calculatorIntent = build();
-		try
-		{
-			startActivity(calculatorIntent);
-		} catch (ActivityNotFoundException e)
-		{
-			return false;
-		}
-		return true;
+		startActivity(build());
 	}
 }

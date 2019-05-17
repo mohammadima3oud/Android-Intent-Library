@@ -1,21 +1,20 @@
 package com.next.androidintentlibrary;
 
 import android.app.Activity;
-import android.content.ActivityNotFoundException;
 import android.content.Context;
 import android.content.Intent;
 import android.net.Uri;
-import androidx.annotation.NonNull;
-import android.text.TextUtils;
 
-import java.net.URL;
+import androidx.annotation.NonNull;
+
+import android.text.TextUtils;
 
 public class BrowserIntents
 {
 	private Context context;
 	protected Intent intent;
 
-	BrowserIntents(Context context)
+	private BrowserIntents(Context context)
 	{
 		this.context = context;
 	}
@@ -25,7 +24,7 @@ public class BrowserIntents
 		return new BrowserIntents(context);
 	}
 
-	public BrowserIntents openBrowserIntent()
+	public BrowserIntents openBrowser()
 	{
 		intent = new Intent();
 		intent.setAction(Intent.ACTION_MAIN);
@@ -48,25 +47,12 @@ public class BrowserIntents
 		return this;
 	}
 
-	public BrowserIntents openLink(URL url)
+	public BrowserIntents openLink(Uri uri)
 	{
-		return openLink(url.toString());
+		return openLink(uri.toString());
 	}
 
-	// TODO: 8/30/2017 How to use URL Http And Https ?
-	public BrowserIntents LoadWebURL(String http)
-	{
-		Uri webpage = Uri.parse(http);
-		intent = new Intent(Intent.ACTION_VIEW);
-		intent.setData(webpage);// TODO: 8/30/2017 This URL can be Http Or Https
-		intent.setType("text/plain");
-		intent.setType("text/html");
-		intent.setType("application/xhtml+xml");
-		intent.setType("application/vnd.wap.xhtml+xml");
-		return this;
-	}
-
-	public BrowserIntents openAUrlInBrowser()
+	public BrowserIntents openGoogle()
 	{
 		Uri uri = Uri.parse("https://google.com");
 		intent = new Intent(Intent.ACTION_VIEW, uri);
@@ -87,16 +73,8 @@ public class BrowserIntents
 		context.startActivity(intent);
 	}
 
-	public boolean show()
+	public void show()
 	{
-		Intent browserIntent = build();
-		try
-		{
-			startActivity(browserIntent);
-		} catch (ActivityNotFoundException e)
-		{
-			return false;
-		}
-		return true;
+		startActivity(build());
 	}
 }

@@ -5,6 +5,39 @@ import androidx.appcompat.app.AppCompatActivity;
 
 public class SampleActivity extends AppCompatActivity
 {
+	//TODO: add to readme
+	// Resources
+	// https://Stackoverflow.com android intent documentation (no longer available)
+	// https://github.com/d-tarasov/android-intents
+	// https://developer.android.com/guide/components/intents-common.html
+	// https://github.com/marvinlabs/android-intents
+	// NOTE: Flags
+	// NO 1: FLAG_ACTIVITY_NEW_TASK:
+	// When using this flag, if a task is already running for the activity you are now starting,
+	// then a new activity will not be started; instead,
+	// the current task will simply be brought to the front of the screen with the state it was last in.
+
+	// NOTE: common actions
+	// NO 2: ACTION_MAIN
+	// Activity Action Start as a main entry point, does not expect to receive data.
+	// NO 3: ACTION_VIEW
+	// This is the most common action performed on a data, usually to view sth.
+	// NO 4: ACTION_EDIT
+	// This is the most common action to edit a data, usually to edit some part of intent.
+	// NO 5: ACTION_DEFAULT
+	// search on it
+
+	// NOTE: you need to use constant value of an action for intent filter
+	// NOTE: you can find constant value for each action in docs (Ctrl + Q)
+	// NOTE: Intent Filter Example
+	// <activity ...>
+	// <intent-filter>
+	// <action android:name="android.intent.action.INSERT" />
+	// <data android:mimeType="vnd.android.cursor.dir/event" />
+	// <category android:name="android.intent.category.DEFAULT" />
+	// </intent-filter>
+	// </activity>
+
 	private void settingIntents()
 	{
 		EmailIntents.from(this).newEmailIntent(new String[]{"sadf", "sf"}, "ad", "af", Uri.EMPTY).build();

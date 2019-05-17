@@ -16,19 +16,6 @@ import java.util.Locale;
 
 public class FromModules
 {
-	public static Intent calendarIntent()
-	{
-
-		Intent intent = new Intent(Intent.ACTION_EDIT);
-		intent.setType("vnd.android.cursor.item/event");
-		intent.putExtra("title", "Some title");
-		intent.putExtra("description", "Some description");
-		intent.putExtra("beginTime", 5000);
-		intent.putExtra("endTime", 5000);
-
-		return intent;
-	}
-
 	public static CustomTabsIntent chromeCustomTabsIntent(Context context)
 	{
 		String url = "https://www.google.com/";
@@ -120,7 +107,6 @@ public class FromModules
 	}
 
 	// part of googlePlayStoreOurProduct()
-	@SuppressWarnings("deprecation")
 	public void setFlags(Intent i)
 	{
 		i.addFlags(Intent.FLAG_ACTIVITY_NO_HISTORY);
@@ -131,13 +117,6 @@ public class FromModules
 		{
 			i.addFlags(Intent.FLAG_ACTIVITY_CLEAR_WHEN_TASK_RESET);
 		}
-	}
-
-	public static Intent openAUrlInBrowser()
-	{
-		Uri uri = Uri.parse("https://google.com");
-		Intent intent = new Intent(Intent.ACTION_VIEW, uri);
-		return intent;
 	}
 
 	public static Intent smsIntent()
