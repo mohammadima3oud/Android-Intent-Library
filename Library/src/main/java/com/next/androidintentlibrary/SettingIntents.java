@@ -252,14 +252,14 @@ public class SettingIntents
 	}
 
 
-	@RequiresApi(api = Build.VERSION_CODES.M)
+	@RequiresApi(api = Build.VERSION_CODES.N)
 	public SettingIntents webViewSetting()
 	{
 		intent = new Intent(ACTION_WEBVIEW_SETTINGS);
 		return this;
 	}
 
-	@RequiresApi(api = Build.VERSION_CODES.M)
+	@RequiresApi(api = Build.VERSION_CODES.N)
 	public SettingIntents vpnSetting()
 	{
 		intent = new Intent(ACTION_VPN_SETTINGS);
@@ -285,7 +285,7 @@ public class SettingIntents
 		return this;
 	}
 
-	public SettingIntents dataRomingSetting()
+	public SettingIntents dataRoamingSetting()
 	{
 		intent = new Intent(ACTION_DATA_ROAMING_SETTINGS);
 		return this;
@@ -297,8 +297,8 @@ public class SettingIntents
 		return this;
 	}
 
-	@RequiresApi(api = Build.VERSION_CODES.M)
-	public SettingIntents hardKeybordSetting()
+	@RequiresApi(api = Build.VERSION_CODES.N)
+	public SettingIntents hardKeyboardSetting()
 	{
 		intent = new Intent(ACTION_HARD_KEYBOARD_SETTINGS);
 		return this;
@@ -330,7 +330,8 @@ public class SettingIntents
 		return this;
 	}
 
-	public SettingIntents quickLaunchSetting()
+	// TODO: error on device
+	private SettingIntents quickLaunchSetting()
 	{
 		intent = new Intent(ACTION_QUICK_LAUNCH_SETTINGS);
 		return this;
@@ -356,7 +357,7 @@ public class SettingIntents
 		return this;
 	}
 
-	@RequiresApi(api = Build.VERSION_CODES.M)
+	@RequiresApi(api = Build.VERSION_CODES.N)
 	public SettingIntents vrListenerSetting()
 	{
 		intent = new Intent(ACTION_VR_LISTENER_SETTINGS);
@@ -370,7 +371,7 @@ public class SettingIntents
 	}
 
 	@RequiresApi(api = Build.VERSION_CODES.M)
-	public SettingIntents ignoreBattreyOptimizationSetting()
+	public SettingIntents ignoreBatteryOptimizationSetting()
 	{
 		intent = new Intent(ACTION_IGNORE_BATTERY_OPTIMIZATION_SETTINGS);
 		return this;
@@ -382,7 +383,7 @@ public class SettingIntents
 		return this;
 	}
 
-	@RequiresApi(api = Build.VERSION_CODES.M)
+	@RequiresApi(api = Build.VERSION_CODES.N)
 	public SettingIntents manageDefaultAppsSetting()
 	{
 		intent = new Intent(ACTION_MANAGE_DEFAULT_APPS_SETTINGS);
@@ -402,7 +403,7 @@ public class SettingIntents
 		return this;
 	}
 
-	@RequiresApi(api = Build.VERSION_CODES.M)
+	@RequiresApi(api = Build.VERSION_CODES.N)
 	public SettingIntents ignoreBackgroundDataRestrictionsSetting(String packageName)
 	{
 		intent = new Intent(ACTION_IGNORE_BACKGROUND_DATA_RESTRICTIONS_SETTINGS, Uri.parse("package:" + packageName));

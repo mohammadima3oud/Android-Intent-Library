@@ -6,6 +6,7 @@ import android.content.Intent;
 import android.net.Uri;
 import android.os.Build;
 import android.provider.Telephony;
+import android.text.TextUtils;
 
 import androidx.annotation.NonNull;
 
@@ -100,6 +101,93 @@ public class MessagingIntents
 			intent.setType("vnd.android-dir/mms-sms");
 			return this;
 		}
+	}
+
+	public MessagingIntents newEmptySmsIntent()
+	{
+		return newSmsIntent(null, (String[]) null);
+	}
+
+	public MessagingIntents newEmptySmsIntent(String phoneNumber)
+	{
+		return newSmsIntent(null, new String[]{phoneNumber});
+	}
+
+	public MessagingIntents newEmptySmsIntent(String[] phoneNumbers)
+	{
+		return newSmsIntent(null, phoneNumbers);
+	}
+
+	public MessagingIntents newSmsIntent(String body)
+	{
+		return newSmsIntent(body, (String[]) null);
+	}
+
+	public MessagingIntents newSmsIntent(String body, String phoneNumber)
+	{
+		return newSmsIntent(body, new String[]{phoneNumber});
+	}
+
+	public MessagingIntents newSmsIntent(String body, String[] phoneNumbers)
+	{
+		Uri smsUri;
+		if (phoneNumbers == null || phoneNumbers.length == 0)
+		{
+			smsUri = Uri.parse("smsto:");
+		} else
+		{
+			smsUri = Uri.parse("smsto:" + Uri.encode(TextUtils.join(",", phoneNumbers)));
+		}
+
+
+		if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT)
+		{
+			intent = new Intent(Intent.ACTION_SENDTO, smsUri);
+			intent.setPackage(Telephony.Sms.getDefaultSmsPackage(context));
+		} else
+		{
+			intent = new Intent(Intent.ACTION_VIEW, smsUri);
+		}
+
+		if (body != null)
+		{
+			intent.putExtra("sms_body", body);
+		}
+
+		return this;
+	}
+
+	public MessagingIntents openEmptySmsIntent()
+	{
+		return newSmsIntent(null, (String[]) null);
+	}
+
+	public MessagingIntents openSmsNumberIntent(String phoneNumber)
+	{
+		if (phoneNumber != null)
+			return newSmsIntent(null, new String[]{phoneNumber});
+		return null;
+	}
+
+	public MessagingIntents openSmsNumbersIntent(String[] phoneNumbers)
+	{
+		return newSmsIntent(null, phoneNumbers);
+	}
+
+
+	public MessagingIntents openSmsBodyIntent(String body)
+	{
+		return newSmsIntent(body, (String[]) null);
+	}
+
+	public MessagingIntents openSmsNumberBodyIntent(String body, String phoneNumber)
+	{
+		return newSmsIntent(body, new String[]{phoneNumber});
+	}
+
+	public MessagingIntents openSmsNumbersBodyIntent(String body, String[] phoneNumbers)
+	{
+		return newSmsIntent(body, phoneNumbers);
 	}
 
 	public Intent build()

@@ -18,6 +18,7 @@ import android.widget.Toast;
 public class ContactIntents
 {
 	public static final int REQUEST_SELECT_CONTACT = 5;
+	public static final int REQUEST_SELECT_PHONE_NUMBER = 6;
 	private Context context;
 	private Intent intent;
 
@@ -122,6 +123,18 @@ public class ContactIntents
 	{
 		intent = new Intent(Intent.ACTION_PICK);
 		intent.setType(ContactsContract.CommonDataKinds.Phone.CONTENT_TYPE);
+		return this;
+	}
+
+	// TODO: requires start activity for result, on activity result, should only be used with build not show
+	public ContactIntents pickContact(String scope)
+	{
+		intent = new Intent(Intent.ACTION_PICK, Uri.parse("content://com.android.contacts/contacts"));
+
+		if (!TextUtils.isEmpty(scope))
+		{
+			intent.setType(scope);
+		}
 		return this;
 	}
 
