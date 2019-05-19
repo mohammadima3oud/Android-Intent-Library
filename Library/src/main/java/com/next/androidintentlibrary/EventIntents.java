@@ -1,7 +1,6 @@
 package com.next.androidintentlibrary;
 
 import android.app.Activity;
-import android.content.ActivityNotFoundException;
 import android.content.Context;
 import android.content.Intent;
 import android.provider.CalendarContract;

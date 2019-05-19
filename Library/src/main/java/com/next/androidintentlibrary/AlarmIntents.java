@@ -24,6 +24,12 @@ public class AlarmIntents
 		return new AlarmIntents(context);
 	}
 
+	public AlarmIntents openAlarms()
+	{
+		intent = new Intent(AlarmClock.ACTION_SHOW_ALARMS);
+		return this;
+	}
+
 	public AlarmIntents createAlarm(String message, int hour, int minutes, boolean skipUi)
 	{
 		intent = new Intent(AlarmClock.ACTION_SET_ALARM);
@@ -58,12 +64,6 @@ public class AlarmIntents
 		// TODO: add below overloads too
 		// intent.putExtra(AlarmClock.EXTRA_DAYS, days);
 		// intent.putExtra(AlarmClock.EXTRA_RINGTONE, ringtone);
-		return this;
-	}
-
-	public AlarmIntents showAlarms()
-	{
-		intent = new Intent(AlarmClock.ACTION_SHOW_ALARMS);
 		return this;
 	}
 

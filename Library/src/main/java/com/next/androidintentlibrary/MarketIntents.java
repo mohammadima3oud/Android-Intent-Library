@@ -46,19 +46,22 @@ public class MarketIntents
 		return showInAmazon(packageName);
 	}
 
-	public MarketIntents showThisAppInBazaar()
+	// TODO:
+	private MarketIntents showThisAppInBazaar()
 	{
 		String packageName = context.getApplicationContext().getPackageName();
 		return showInBazaar(packageName);
 	}
 
-	public MarketIntents showThisAppInMyket()
+	// TODO:
+	private MarketIntents showThisAppInMyket()
 	{
 		String packageName = context.getApplicationContext().getPackageName();
 		return showInMyket(packageName);
 	}
 
-	public MarketIntents showThisAppInIranApps()
+	// TODO:
+	private MarketIntents showThisAppInIranApps()
 	{
 		String packageName = context.getApplicationContext().getPackageName();
 		return showInIranApps(packageName);
@@ -121,19 +124,19 @@ public class MarketIntents
 	}
 
 	// TODO:
-	public MarketIntents showInBazaar(String packageName)
+	private MarketIntents showInBazaar(String packageName)
 	{
 		return this;
 	}
 
 	// TODO:
-	public MarketIntents showInMyket(String packageName)
+	private MarketIntents showInMyket(String packageName)
 	{
 		return this;
 	}
 
 	// TODO:
-	public MarketIntents showInIranApps(String packageName)
+	private MarketIntents showInIranApps(String packageName)
 	{
 		return this;
 	}

@@ -1,7 +1,6 @@
 package com.next.androidintentlibrary;
 
 import android.app.Activity;
-import android.content.ActivityNotFoundException;
 import android.content.Context;
 import android.content.Intent;
 
@@ -9,8 +8,6 @@ import androidx.annotation.NonNull;
 
 public class GalleryIntents
 {
-	public static final int REQUEST_IMAGE_PICK = 7;
-	public static final int REQUEST_IMAGE_OPEN = 8;
 	private Context context;
 	private Intent intent;
 
@@ -33,7 +30,6 @@ public class GalleryIntents
 		return this;
 	}
 
-	// TODO: should only be used with startActivityForResult
 	public GalleryIntents pickImage()
 	{
 		intent = new Intent(Intent.ACTION_PICK);

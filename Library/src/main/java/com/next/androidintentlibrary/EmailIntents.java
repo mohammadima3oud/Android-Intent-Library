@@ -1,20 +1,13 @@
 package com.next.androidintentlibrary;
 
 import android.app.Activity;
-import android.content.ActivityNotFoundException;
 import android.content.Context;
 import android.content.Intent;
-import android.net.Uri;
 
 import androidx.annotation.NonNull;
 
-import java.util.ArrayList;
-
-import static android.content.Intent.EXTRA_STREAM;
-
 public class EmailIntents
 {
-	private final String MIME_TYPE_EMAIL = "message/rfc822";
 	private Context context;
 	private Intent intent;
 
@@ -28,18 +21,6 @@ public class EmailIntents
 		return new EmailIntents(context);
 	}
 
-	// TODO: more overloads
-	public EmailIntents newEmail(String[] addresses, String subject, String body)
-	{
-		intent = new Intent(Intent.ACTION_SEND);
-		intent.putExtra(Intent.EXTRA_EMAIL, addresses);
-		intent.putExtra(Intent.EXTRA_TEXT, body);
-		intent.putExtra(Intent.EXTRA_SUBJECT, subject);
-		// intent.putExtra(Intent.EXTRA_STREAM, attachment);
-		intent.setType(MIME_TYPE_EMAIL);
-		return this;
-	}
-
 	public EmailIntents openEmail()
 	{
 		intent = new Intent();
@@ -49,22 +30,23 @@ public class EmailIntents
 		return this;
 	}
 
-	public EmailIntents sendEmail(String to, String subject, String text)
+	// TODO: more overloads
+	public EmailIntents sendEmail(String to, String subject, String message)
 	{
-		return sendEmail(new String[]{to}, subject, text);
+		return sendEmail(new String[]{to}, subject, message);
 	}
 
-	public EmailIntents sendEmail(String[] to, String subject, String text)
+	public EmailIntents sendEmail(String[] to, String subject, String message)
 	{
 		intent = new Intent(Intent.ACTION_SEND);
 		intent.setType("message/rfc822");
 		intent.putExtra(Intent.EXTRA_EMAIL, to);
 		intent.putExtra(Intent.EXTRA_SUBJECT, subject);
-		intent.putExtra(Intent.EXTRA_TEXT, text);
+		intent.putExtra(Intent.EXTRA_TEXT, message);
 		return this;
 	}
 
-	public EmailIntents composeAnEmailSend(String[] addresses, String[] cc, String[] bcc, String subject, String extraText)
+	public EmailIntents sendEmail(String[] addresses, String[] cc, String[] bcc, String subject, String message)
 	{
 		intent = new Intent(Intent.ACTION_SEND);
 		intent.setType("*/*");
@@ -73,38 +55,8 @@ public class EmailIntents
 		intent.putExtra(Intent.EXTRA_CC, cc);
 		intent.putExtra(Intent.EXTRA_BCC, bcc);
 		intent.putExtra(Intent.EXTRA_SUBJECT, subject);
-		intent.putExtra(Intent.EXTRA_TEXT, extraText);
+		intent.putExtra(Intent.EXTRA_TEXT, message);
 		//intent.putExtra(Intent.EXTRA_STREAM, attachment);
-		return this;
-	}
-
-	// TODO: 8/30/2017 Error close Program
-//	public static Intent composeAnEmailSendTo(String[] addresses , String[] cc , String[] bcc , String subject , String extraText , Uri attachment)
-//	{
-//		Intent intent = new Intent(Intent.ACTION_SENDTO);
-//		intent.setType("*/*");
-//		intent.setType("text/plain");
-//		intent.putExtra(Intent.EXTRA_EMAIL, addresses);
-//		intent.putExtra(Intent.EXTRA_CC, cc);
-//		intent.putExtra(Intent.EXTRA_BCC, bcc);
-//		intent.putExtra(Intent.EXTRA_SUBJECT, subject);
-//		intent.putExtra(Intent.EXTRA_TEXT, extraText);
-//		intent.putExtra(Intent.EXTRA_STREAM, attachment);
-//		return intent;
-//	}
-
-	// TODO: 8/30/2017 Error After Select Gmail To Open!
-	public EmailIntents composeAnEmailMultiple(String[] addresses, String[] cc, String[] bcc, String subject, String extraText, ArrayList<Uri> attachment)
-	{
-		intent = new Intent(Intent.ACTION_SEND_MULTIPLE);
-		intent.setType("*/*");
-		//intent.setType("text/plain");
-		intent.putExtra(Intent.EXTRA_EMAIL, addresses);
-		intent.putExtra(Intent.EXTRA_CC, cc);
-		intent.putExtra(Intent.EXTRA_BCC, bcc);
-		intent.putExtra(Intent.EXTRA_SUBJECT, subject);
-		intent.putExtra(Intent.EXTRA_TEXT, extraText);
-		intent.putExtra(EXTRA_STREAM, attachment);
 		return this;
 	}
 

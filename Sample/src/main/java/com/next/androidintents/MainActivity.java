@@ -39,7 +39,7 @@ public class MainActivity extends AppCompatActivity
 		setContentView(R.layout.activity_main);
 
 		// Alarm
-		// AlarmIntents.from(this).showAlarms().show();
+		// AlarmIntents.from(this).openAlarms().show();
 		// AlarmIntents.from(this).createAlarm("Wake up", 6, 30, false).show(); // NOTE: requires com.android.alarm.permission.SET_ALARM
 		// AlarmIntents.from(this).createAlarm("Wake up", 6, 30, false, false).show(); // NOTE: requires com.android.alarm.permission.SET_ALARM
 		// AlarmIntents.from(this).createAlarm("Wake up", 6, 30, false, false, false).show(); // NOTE: requires com.android.alarm.permission.SET_ALARM
@@ -69,9 +69,9 @@ public class MainActivity extends AppCompatActivity
 
 		// Email
 		// EmailIntents.from(this).openEmail().show();
-		// EmailIntents.from(this).newEmail(new String[]{"a2bad@gmail.com", "a3bad@gmail.com"}, "Work", "Please send your resume").show();
+		// EmailIntents.from(this).sendEmail(new String[]{"a2bad@gmail.com", "a3bad@gmail.com"}, "Work", "Please send your resume").show();
 		// EmailIntents.from(this).sendEmail("a2bad@gmail.com", "Work", "Please send your resume").show();
-		// EmailIntents.from(this).composeAnEmailSend(new String[]{"a2bad@gmail.com"}, new String[]{"a3bad@gmail.com"}, new String[]{"a4bad@gmail.com"}, "Work", "Please send your resume").show();
+		// EmailIntents.from(this).sendEmail(new String[]{"a2bad@gmail.com"}, new String[]{"a3bad@gmail.com"}, new String[]{"a4bad@gmail.com"}, "Work", "Please send your resume").show();
 
 		// Event
 		// EventIntents.from(this).createEvent("Movie","Watch Avenger End Games").show();
@@ -82,7 +82,7 @@ public class MainActivity extends AppCompatActivity
 
 		// Gallery
 		// GalleryIntents.from(this).openGallery().show();
-		// startActivityForResult(GalleryIntents.from(this).pickImage().build(), GalleryIntents.REQUEST_IMAGE_PICK);
+		// startActivityForResult(GalleryIntents.from(this).pickImage().build(), RequestTag.PICK_IMAGE);
 
 		// Geo (TODO: later)
 
@@ -100,7 +100,7 @@ public class MainActivity extends AppCompatActivity
 		// Media (TODO: separate into music,video,picture intents)
 
 
-		// Messaging (later, more codes are inside)
+		// Messaging (TODO: later, more codes are inside)
 //		MessagingIntents.from(this).newSmsIntent("this is a test SMS", "+123456789").show();
 //		MessagingIntents.from(this).newSmsIntent("this is a test SMS").show();
 
@@ -191,6 +191,9 @@ public class MainActivity extends AppCompatActivity
 				break;
 			case RequestTag.PICK_SPECIFIC_CONTACT_DATA:
 				Log.i("Android-Intent-Library", "Picked Specific Contact Data");
+				break;
+			case RequestTag.PICK_IMAGE:
+				Log.i("Android-Intent-Library", "Picked Image");
 				break;
 		}
 	}
