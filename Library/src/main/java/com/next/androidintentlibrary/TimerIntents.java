@@ -3,10 +3,8 @@ package com.next.androidintentlibrary;
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
-import android.os.Build;
 import android.provider.AlarmClock;
 import androidx.annotation.NonNull;
-import androidx.annotation.RequiresApi;
 
 public class TimerIntents
 {
@@ -23,13 +21,11 @@ public class TimerIntents
 		return new TimerIntents(context);
 	}
 
-	// NOTE: requires com.android.alarm.permission.SET_ALARM permission
-	@RequiresApi(api = Build.VERSION_CODES.KITKAT)
-	public TimerIntents createTimer(String message, int length, boolean skipUi)
+	public TimerIntents createTimer(String subject, int seconds, boolean skipUi)
 	{
 		intent = new Intent(AlarmClock.ACTION_SET_TIMER);
-		intent.putExtra(AlarmClock.EXTRA_MESSAGE, message);
-		intent.putExtra(AlarmClock.EXTRA_LENGTH, length);
+		intent.putExtra(AlarmClock.EXTRA_MESSAGE, subject);
+		intent.putExtra(AlarmClock.EXTRA_LENGTH, seconds);
 		intent.putExtra(AlarmClock.EXTRA_SKIP_UI, skipUi);
 		return this;
 	}

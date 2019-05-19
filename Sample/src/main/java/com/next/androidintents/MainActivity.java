@@ -113,7 +113,7 @@ public class MainActivity extends AppCompatActivity
 		// Phone
 		// PhoneIntents.from(this).showDialNumber().show();
 		// PhoneIntents.from(this).showDialNumber("+123456789").show();
-		// PhoneIntents.from(this).callNumber("+123456789").show();
+		// PhoneIntents.from(this).callNumber("+123456789").show(); // Note: requires android.permission.CALL_PHONE
 
 		// Search
 
@@ -176,8 +176,7 @@ public class MainActivity extends AppCompatActivity
 
 
 		// Timer
-//		TimerIntents.from(this).createTimer("Run", 200, false).show();
-
+		// TimerIntents.from(this).createTimer("Run", 180, false).show(); // Note: requires com.android.alarm.permission.SET_ALARM
 	}
 
 	@Override

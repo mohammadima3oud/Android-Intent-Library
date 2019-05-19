@@ -251,7 +251,6 @@ public class SettingIntents
 		return this;
 	}
 
-
 	@RequiresApi(api = Build.VERSION_CODES.N)
 	public SettingIntents webViewSetting()
 	{
