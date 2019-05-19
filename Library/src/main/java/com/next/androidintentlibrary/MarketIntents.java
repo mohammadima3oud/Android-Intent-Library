@@ -1,13 +1,14 @@
 package com.next.androidintentlibrary;
 
 import android.app.Activity;
-import android.content.ActivityNotFoundException;
 import android.content.Context;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.content.pm.ResolveInfo;
 import android.net.Uri;
+
 import androidx.annotation.NonNull;
+
 import android.text.TextUtils;
 
 import java.util.List;
@@ -27,13 +28,43 @@ public class MarketIntents
 		return new MarketIntents(context);
 	}
 
-	public MarketIntents newMarketForAppIntent(Context context)
+	public MarketIntents showThisAppInMarket()
 	{
 		String packageName = context.getApplicationContext().getPackageName();
-		return newMarketForAppIntent(context, packageName);
+		return showInMarket(packageName);
 	}
 
-	public MarketIntents newMarketForAppIntent(Context context, String packageName)
+	public MarketIntents showThisAppInGooglePlay()
+	{
+		String packageName = context.getApplicationContext().getPackageName();
+		return showInGooglePlay(packageName);
+	}
+
+	public MarketIntents showThisAppInAmazon()
+	{
+		String packageName = context.getApplicationContext().getPackageName();
+		return showInAmazon(packageName);
+	}
+
+	public MarketIntents showThisAppInBazaar()
+	{
+		String packageName = context.getApplicationContext().getPackageName();
+		return showInBazaar(packageName);
+	}
+
+	public MarketIntents showThisAppInMyket()
+	{
+		String packageName = context.getApplicationContext().getPackageName();
+		return showInMyket(packageName);
+	}
+
+	public MarketIntents showThisAppInIranApps()
+	{
+		String packageName = context.getApplicationContext().getPackageName();
+		return showInIranApps(packageName);
+	}
+
+	public MarketIntents showInMarket(String packageName)
 	{
 		intent = new Intent(Intent.ACTION_VIEW, Uri.parse("market://details?id=" + packageName));
 
@@ -55,13 +86,13 @@ public class MarketIntents
 		return this;
 	}
 
-	public MarketIntents newGooglePlayIntent(Context context, String packageName)
+	public MarketIntents showInGooglePlay(String packageName)
 	{
 		intent = new Intent(Intent.ACTION_VIEW, Uri.parse("market://details?id=" + packageName));
-
+		intent.setPackage("com.android.vending");
 		if (!isIntentAvailable(context, intent))
 		{
-			return newOpenWebBrowserIntent("https://play.google.com/store/apps/details?id=" + packageName);
+			return showInWebBrowser("https://play.google.com/store/apps/details?id=" + packageName);
 		}
 
 		if (intent != null)
@@ -72,13 +103,13 @@ public class MarketIntents
 		return this;
 	}
 
-	public MarketIntents newAmazonStoreIntent(Context context, String packageName)
+	public MarketIntents showInAmazon(String packageName)
 	{
 		intent = new Intent(Intent.ACTION_VIEW, Uri.parse("amzn://apps/android?p=" + packageName));
-
+		intent.setPackage("com.android.vending");
 		if (!isIntentAvailable(context, intent))
 		{
-			return newOpenWebBrowserIntent("http://www.amazon.com/gp/mas/dl/android?p=" + packageName);
+			return showInWebBrowser("http://www.amazon.com/gp/mas/dl/android?p=" + packageName);
 		}
 
 		if (intent != null)
@@ -89,7 +120,25 @@ public class MarketIntents
 		return this;
 	}
 
-	public MarketIntents newOpenWebBrowserIntent(String url)
+	// TODO:
+	public MarketIntents showInBazaar(String packageName)
+	{
+		return this;
+	}
+
+	// TODO:
+	public MarketIntents showInMyket(String packageName)
+	{
+		return this;
+	}
+
+	// TODO:
+	public MarketIntents showInIranApps(String packageName)
+	{
+		return this;
+	}
+
+	public MarketIntents showInWebBrowser(String url)
 	{
 		if (!url.startsWith("https://") && !url.startsWith("http://"))
 		{
@@ -99,7 +148,7 @@ public class MarketIntents
 		return this;
 	}
 
-	public MarketIntents openMarketIntent()
+	public MarketIntents showGooglePlay()
 	{
 		intent = new Intent();
 		intent.setAction(Intent.ACTION_MAIN);
@@ -108,54 +157,11 @@ public class MarketIntents
 		return this;
 	}
 
-	public MarketIntents googlePlayStoreAppListing(Context context)
+	private static boolean isIntentAvailable(Context context, Intent intent)
 	{
-		String packageName = context.getPackageName();
-		intent = new Intent(Intent.ACTION_VIEW, Uri.parse("market://details?id=" + packageName));
-		// TODO: handle it. in 2 methods
-//		try
-//		{
-//			startActivity(playStoreIntent);
-//		} catch (Exception e)
-//		{
-//			Intent webIntent = new Intent(Intent.ACTION_VIEW, Uri.parse("https://play.google.com/store/apps/details?id=" + packageName));
-//			startActivity(webIntent);
-//		}
-		return this;
-	}
-
-	public MarketIntents openPlayStore(Context context)
-	{
-		return openPlayStore(context, true);
-	}
-
-	public MarketIntents openPlayStore(Context context, boolean openInBrowser)
-	{
-		String appPackageName = context.getPackageName();
-		intent = new Intent(Intent.ACTION_VIEW, Uri.parse("market://details?id=" + appPackageName));
-		if (isIntentAvailable(context, intent))
-		{
-			return this;
-		}
-		if (openInBrowser)
-		{
-			intent = openLink("https://play.google.com/store/apps/details?id=" + appPackageName);
-		}
-		return this;
-	}
-
-	public static Intent openLink(String url)
-	{
-		// if protocol isn't defined use http by default
-		if (!TextUtils.isEmpty(url) && !url.contains("://"))
-		{
-			url = "http://" + url;
-		}
-
-		Intent intent = new Intent();
-		intent.setAction(Intent.ACTION_VIEW);
-		intent.setData(Uri.parse(url));
-		return intent;
+		PackageManager packageManager = context.getPackageManager();
+		List<ResolveInfo> list = packageManager.queryIntentActivities(intent, PackageManager.MATCH_DEFAULT_ONLY);
+		return list.size() > 0;
 	}
 
 	public Intent build()
@@ -172,23 +178,8 @@ public class MarketIntents
 		context.startActivity(intent);
 	}
 
-	public boolean show()
+	public void show()
 	{
-		Intent marketIntent = build();
-		try
-		{
-			startActivity(marketIntent);
-		} catch (ActivityNotFoundException e)
-		{
-			return false;
-		}
-		return true;
-	}
-
-	public static boolean isIntentAvailable(Context context, Intent intent)
-	{
-		PackageManager packageManager = context.getPackageManager();
-		List<ResolveInfo> list = packageManager.queryIntentActivities(intent, PackageManager.MATCH_DEFAULT_ONLY);
-		return list.size() > 0;
+		startActivity(build());
 	}
 }

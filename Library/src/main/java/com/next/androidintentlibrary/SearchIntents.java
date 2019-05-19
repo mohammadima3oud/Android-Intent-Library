@@ -2,10 +2,9 @@ package com.next.androidintentlibrary;
 
 import android.app.Activity;
 import android.app.SearchManager;
-import android.content.ActivityNotFoundException;
 import android.content.Context;
 import android.content.Intent;
-import android.provider.MediaStore;
+
 import androidx.annotation.NonNull;
 
 public class SearchIntents
@@ -21,16 +20,6 @@ public class SearchIntents
 	public static SearchIntents from(@NonNull Context context)
 	{
 		return new SearchIntents(context);
-	}
-
-	// TODO: 8/30/2017 Cant complite this one i do not Know structure it
-	public SearchIntents playAMusicBasedOnSearchQuery(String artist)
-	{
-		intent = new Intent(MediaStore.INTENT_ACTION_MEDIA_PLAY_FROM_SEARCH);
-		intent.putExtra(MediaStore.EXTRA_MEDIA_FOCUS, MediaStore.Audio.Artists.ENTRY_CONTENT_TYPE);
-		intent.putExtra(MediaStore.EXTRA_MEDIA_ARTIST, artist);
-		intent.putExtra(SearchManager.QUERY, artist);
-		return this;
 	}
 
 	public SearchIntents search(String query)
@@ -61,16 +50,8 @@ public class SearchIntents
 		context.startActivity(intent);
 	}
 
-	public boolean show()
+	public void show()
 	{
-		Intent searchIntent = build();
-		try
-		{
-			startActivity(searchIntent);
-		} catch (ActivityNotFoundException e)
-		{
-			return false;
-		}
-		return true;
+		startActivity(build());
 	}
 }

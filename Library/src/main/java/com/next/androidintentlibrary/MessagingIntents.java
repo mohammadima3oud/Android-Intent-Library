@@ -1,12 +1,12 @@
 package com.next.androidintentlibrary;
 
 import android.app.Activity;
-import android.content.ActivityNotFoundException;
 import android.content.Context;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Build;
 import android.provider.Telephony;
+
 import androidx.annotation.NonNull;
 
 import java.util.ArrayList;
@@ -18,7 +18,7 @@ public class MessagingIntents
 	private Context context;
 	private Intent intent;
 
-	MessagingIntents(Context context)
+	private MessagingIntents(Context context)
 	{
 		this.context = context;
 	}
@@ -116,16 +116,8 @@ public class MessagingIntents
 		context.startActivity(intent);
 	}
 
-	public boolean show()
+	public void show()
 	{
-		Intent messagingIntent = build();
-		try
-		{
-			startActivity(messagingIntent);
-		} catch (ActivityNotFoundException e)
-		{
-			return false;
-		}
-		return true;
+		startActivity(build());
 	}
 }

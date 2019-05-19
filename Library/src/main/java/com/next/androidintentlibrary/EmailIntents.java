@@ -28,18 +28,19 @@ public class EmailIntents
 		return new EmailIntents(context);
 	}
 
-	public EmailIntents newEmailIntent(String[] addresses, String subject, String body, Uri attachment)
+	// TODO: more overloads
+	public EmailIntents newEmail(String[] addresses, String subject, String body)
 	{
 		intent = new Intent(Intent.ACTION_SEND);
-		if (addresses != null) intent.putExtra(Intent.EXTRA_EMAIL, addresses);
-		if (body != null) intent.putExtra(Intent.EXTRA_TEXT, body);
-		if (subject != null) intent.putExtra(Intent.EXTRA_SUBJECT, subject);
-		if (attachment != null) intent.putExtra(Intent.EXTRA_STREAM, attachment);
+		intent.putExtra(Intent.EXTRA_EMAIL, addresses);
+		intent.putExtra(Intent.EXTRA_TEXT, body);
+		intent.putExtra(Intent.EXTRA_SUBJECT, subject);
+		// intent.putExtra(Intent.EXTRA_STREAM, attachment);
 		intent.setType(MIME_TYPE_EMAIL);
 		return this;
 	}
 
-	public EmailIntents openEmailIntent()
+	public EmailIntents openEmail()
 	{
 		intent = new Intent();
 		intent.setAction(Intent.ACTION_MAIN);
@@ -63,7 +64,7 @@ public class EmailIntents
 		return this;
 	}
 
-	public EmailIntents composeAnEmailSend(String[] addresses, String[] cc, String[] bcc, String subject, String extraText, Uri attachment)
+	public EmailIntents composeAnEmailSend(String[] addresses, String[] cc, String[] bcc, String subject, String extraText)
 	{
 		intent = new Intent(Intent.ACTION_SEND);
 		intent.setType("*/*");

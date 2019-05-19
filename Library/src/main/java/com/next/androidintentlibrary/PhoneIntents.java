@@ -1,13 +1,14 @@
 package com.next.androidintentlibrary;
 
 import android.app.Activity;
-import android.content.ActivityNotFoundException;
 import android.content.Context;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Build;
 import android.provider.Telephony;
+
 import androidx.annotation.NonNull;
+
 import android.text.TextUtils;
 
 import static android.content.Intent.ACTION_DIAL;
@@ -28,32 +29,32 @@ public class PhoneIntents
 		return new PhoneIntents(context);
 	}
 
-	public PhoneIntents newEmptySmsIntent(Context context)
+	public PhoneIntents newEmptySmsIntent()
 	{
-		return newSmsIntent(context, null, (String[]) null);
+		return newSmsIntent(null, (String[]) null);
 	}
 
-	public PhoneIntents newEmptySmsIntent(Context context, String phoneNumber)
+	public PhoneIntents newEmptySmsIntent(String phoneNumber)
 	{
-		return newSmsIntent(context, null, new String[]{phoneNumber});
+		return newSmsIntent(null, new String[]{phoneNumber});
 	}
 
-	public PhoneIntents newEmptySmsIntent(Context context, String[] phoneNumbers)
+	public PhoneIntents newEmptySmsIntent(String[] phoneNumbers)
 	{
-		return newSmsIntent(context, null, phoneNumbers);
+		return newSmsIntent(null, phoneNumbers);
 	}
 
-	public PhoneIntents newSmsIntent(Context context, String body)
+	public PhoneIntents newSmsIntent(String body)
 	{
-		return newSmsIntent(context, body, (String[]) null);
+		return newSmsIntent(body, (String[]) null);
 	}
 
-	public PhoneIntents newSmsIntent(Context context, String body, String phoneNumber)
+	public PhoneIntents newSmsIntent(String body, String phoneNumber)
 	{
-		return newSmsIntent(context, body, new String[]{phoneNumber});
+		return newSmsIntent(body, new String[]{phoneNumber});
 	}
 
-	public PhoneIntents newSmsIntent(Context context, String body, String[] phoneNumbers)
+	public PhoneIntents newSmsIntent(String body, String[] phoneNumbers)
 	{
 		Uri smsUri;
 		if (phoneNumbers == null || phoneNumbers.length == 0)
@@ -64,7 +65,7 @@ public class PhoneIntents
 			smsUri = Uri.parse("smsto:" + Uri.encode(TextUtils.join(",", phoneNumbers)));
 		}
 
-		Intent intent;
+
 		if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT)
 		{
 			intent = new Intent(Intent.ACTION_SENDTO, smsUri);
@@ -79,13 +80,12 @@ public class PhoneIntents
 			intent.putExtra("sms_body", body);
 		}
 
-		this.intent = intent;
 		return this;
 	}
 
 	public PhoneIntents newDialNumberIntent(String phoneNumber)
 	{
-		final Intent intent;
+
 		if (phoneNumber == null || phoneNumber.trim().length() <= 0)
 		{
 			intent = new Intent(Intent.ACTION_DIAL, Uri.parse("tel:"));
@@ -93,13 +93,12 @@ public class PhoneIntents
 		{
 			intent = new Intent(Intent.ACTION_DIAL, Uri.parse("tel:" + phoneNumber.replace(" ", "")));
 		}
-		this.intent = intent;
 		return this;
 	}
 
 	public PhoneIntents newCallNumberIntent(String phoneNumber)
 	{
-		final Intent intent;
+
 		if (phoneNumber == null || phoneNumber.trim().length() <= 0)
 		{
 			intent = new Intent(Intent.ACTION_CALL, Uri.parse("tel:"));
@@ -107,7 +106,7 @@ public class PhoneIntents
 		{
 			intent = new Intent(Intent.ACTION_CALL, Uri.parse("tel:" + phoneNumber.replace(" ", "")));
 		}
-		this.intent = intent;
+
 		return this;
 	}
 
@@ -118,50 +117,46 @@ public class PhoneIntents
 
 	public PhoneIntents openEmptySmsIntent()
 	{
-		return newSmsIntent(context, null, (String[]) null);
+		return newSmsIntent(null, (String[]) null);
 	}
 
 	public PhoneIntents openSmsNumberIntent(String phoneNumber)
 	{
 		if (phoneNumber != null)
-			return newSmsIntent(context, null, new String[]{phoneNumber});
+			return newSmsIntent(null, new String[]{phoneNumber});
 		return null;
 	}
 
 	public PhoneIntents openSmsNumbersIntent(String[] phoneNumbers)
 	{
-		return newSmsIntent(context, null, phoneNumbers);
+		return newSmsIntent(null, phoneNumbers);
 	}
 
 
 	public PhoneIntents openSmsBodyIntent(String body)
 	{
-		return newSmsIntent(context, body, (String[]) null);
+		return newSmsIntent(body, (String[]) null);
 	}
 
 	public PhoneIntents openSmsNumberBodyIntent(String body, String phoneNumber)
 	{
-		return newSmsIntent(context, body, new String[]{phoneNumber});
+		return newSmsIntent(body, new String[]{phoneNumber});
 	}
 
 	public PhoneIntents openSmsNumbersBodyIntent(String body, String[] phoneNumbers)
 	{
-		return newSmsIntent(context, body, phoneNumbers);
+		return newSmsIntent(body, phoneNumbers);
 	}
 
 	@SuppressWarnings("deprecation")
 	public PhoneIntents newPickContactIntent(String scope)
 	{
-		Intent intent;
 		intent = new Intent(Intent.ACTION_PICK, Uri.parse("content://com.android.contacts/contacts"));
-
 
 		if (!TextUtils.isEmpty(scope))
 		{
 			intent.setType(scope);
 		}
-
-		this.intent = intent;
 		return this;
 	}
 
@@ -195,17 +190,9 @@ public class PhoneIntents
 		context.startActivity(intent);
 	}
 
-	public boolean show()
+	public void show()
 	{
-		Intent phoneIntent = build();
-		try
-		{
-			startActivity(phoneIntent);
-		} catch (ActivityNotFoundException e)
-		{
-			return false;
-		}
-		return true;
+		startActivity(build());
 	}
 
 	public PhoneIntents openDialNumberIntent(String phoneNumber)

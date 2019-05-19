@@ -4,17 +4,17 @@ import android.app.Activity;
 import android.content.ActivityNotFoundException;
 import android.content.Context;
 import android.content.Intent;
+
 import androidx.annotation.NonNull;
 
 public class GalleryIntents
 {
-	//TODO: make an enu for all Requests
-	public static final int REQUEST_IMAGE_GET = 7;
+	public static final int REQUEST_IMAGE_PICK = 7;
 	public static final int REQUEST_IMAGE_OPEN = 8;
 	private Context context;
 	private Intent intent;
 
-	GalleryIntents(Context context)
+	private GalleryIntents(Context context)
 	{
 		this.context = context;
 	}
@@ -24,7 +24,7 @@ public class GalleryIntents
 		return new GalleryIntents(context);
 	}
 
-	public GalleryIntents openGalleryIntent()
+	public GalleryIntents openGallery()
 	{
 		intent = new Intent();
 		intent.setAction(Intent.ACTION_MAIN);
@@ -33,6 +33,7 @@ public class GalleryIntents
 		return this;
 	}
 
+	// TODO: should only be used with startActivityForResult
 	public GalleryIntents pickImage()
 	{
 		intent = new Intent(Intent.ACTION_PICK);
@@ -54,16 +55,8 @@ public class GalleryIntents
 		context.startActivity(intent);
 	}
 
-	public boolean show()
+	public void show()
 	{
-		Intent galleryIntent = build();
-		try
-		{
-			startActivity(galleryIntent);
-		} catch (ActivityNotFoundException e)
-		{
-			return false;
-		}
-		return true;
+		startActivity(build());
 	}
 }

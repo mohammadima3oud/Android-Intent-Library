@@ -5,6 +5,7 @@ import android.content.ActivityNotFoundException;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Build;
+
 import androidx.annotation.NonNull;
 import androidx.annotation.RequiresApi;
 
@@ -15,7 +16,7 @@ public class FileIntents
 	private Context context;
 	private Intent intent;
 
-	FileIntents(Context context)
+	private FileIntents(Context context)
 	{
 		this.context = context;
 	}
@@ -24,6 +25,7 @@ public class FileIntents
 	{
 		return new FileIntents(context);
 	}
+
 	public FileIntents retrievAnSpecificTypeOfFile(Boolean allowMultiple, Boolean localOnly)
 	{
 		intent = new Intent(Intent.ACTION_GET_CONTENT);
@@ -84,16 +86,8 @@ public class FileIntents
 		context.startActivity(intent);
 	}
 
-	public boolean show()
+	public void show()
 	{
-		Intent fileIntent = build();
-		try
-		{
-			startActivity(fileIntent);
-		} catch (ActivityNotFoundException e)
-		{
-			return false;
-		}
-		return true;
+		startActivity(build());
 	}
 }

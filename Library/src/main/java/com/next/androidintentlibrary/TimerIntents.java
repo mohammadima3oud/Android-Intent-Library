@@ -1,7 +1,6 @@
 package com.next.androidintentlibrary;
 
 import android.app.Activity;
-import android.content.ActivityNotFoundException;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Build;
@@ -14,7 +13,7 @@ public class TimerIntents
 	private Context context;
 	private Intent intent;
 
-	TimerIntents(Context context)
+	private TimerIntents(Context context)
 	{
 		this.context = context;
 	}
@@ -26,7 +25,7 @@ public class TimerIntents
 
 	// NOTE: requires com.android.alarm.permission.SET_ALARM permission
 	@RequiresApi(api = Build.VERSION_CODES.KITKAT)
-	public TimerIntents createTimerIntent(String message, int length, boolean skipUi)
+	public TimerIntents createTimer(String message, int length, boolean skipUi)
 	{
 		intent = new Intent(AlarmClock.ACTION_SET_TIMER);
 		intent.putExtra(AlarmClock.EXTRA_MESSAGE, message);
@@ -49,16 +48,8 @@ public class TimerIntents
 		context.startActivity(intent);
 	}
 
-	public boolean show()
+	public void show()
 	{
-		Intent timerIntent = build();
-		try
-		{
-			startActivity(timerIntent);
-		} catch (ActivityNotFoundException e)
-		{
-			return false;
-		}
-		return true;
+		startActivity(build());
 	}
 }

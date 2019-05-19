@@ -1,11 +1,11 @@
 package com.next.androidintentlibrary;
 
 import android.app.Activity;
-import android.content.ActivityNotFoundException;
 import android.content.Context;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Build;
+
 import androidx.annotation.NonNull;
 import androidx.annotation.RequiresApi;
 
@@ -251,14 +251,15 @@ public class SettingIntents
 		return this;
 	}
 
-	@RequiresApi(api = Build.VERSION_CODES.N)
+
+	@RequiresApi(api = Build.VERSION_CODES.M)
 	public SettingIntents webViewSetting()
 	{
 		intent = new Intent(ACTION_WEBVIEW_SETTINGS);
 		return this;
 	}
 
-	@RequiresApi(api = Build.VERSION_CODES.N)
+	@RequiresApi(api = Build.VERSION_CODES.M)
 	public SettingIntents vpnSetting()
 	{
 		intent = new Intent(ACTION_VPN_SETTINGS);
@@ -296,7 +297,7 @@ public class SettingIntents
 		return this;
 	}
 
-	@RequiresApi(api = Build.VERSION_CODES.N)
+	@RequiresApi(api = Build.VERSION_CODES.M)
 	public SettingIntents hardKeybordSetting()
 	{
 		intent = new Intent(ACTION_HARD_KEYBOARD_SETTINGS);
@@ -355,7 +356,7 @@ public class SettingIntents
 		return this;
 	}
 
-	@RequiresApi(api = Build.VERSION_CODES.N)
+	@RequiresApi(api = Build.VERSION_CODES.M)
 	public SettingIntents vrListenerSetting()
 	{
 		intent = new Intent(ACTION_VR_LISTENER_SETTINGS);
@@ -381,7 +382,7 @@ public class SettingIntents
 		return this;
 	}
 
-	@RequiresApi(api = Build.VERSION_CODES.N)
+	@RequiresApi(api = Build.VERSION_CODES.M)
 	public SettingIntents manageDefaultAppsSetting()
 	{
 		intent = new Intent(ACTION_MANAGE_DEFAULT_APPS_SETTINGS);
@@ -401,7 +402,7 @@ public class SettingIntents
 		return this;
 	}
 
-	@RequiresApi(api = Build.VERSION_CODES.N)
+	@RequiresApi(api = Build.VERSION_CODES.M)
 	public SettingIntents ignoreBackgroundDataRestrictionsSetting(String packageName)
 	{
 		intent = new Intent(ACTION_IGNORE_BACKGROUND_DATA_RESTRICTIONS_SETTINGS, Uri.parse("package:" + packageName));
@@ -422,16 +423,8 @@ public class SettingIntents
 		context.startActivity(intent);
 	}
 
-	public boolean show()
+	public void show()
 	{
-		Intent settingIntent = build();
-		try
-		{
-			startActivity(settingIntent);
-		} catch (ActivityNotFoundException e)
-		{
-			return false;
-		}
-		return true;
+		startActivity(build());
 	}
 }

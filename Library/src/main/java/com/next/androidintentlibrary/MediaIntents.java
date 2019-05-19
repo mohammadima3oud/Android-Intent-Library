@@ -6,6 +6,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.net.Uri;
 import android.provider.MediaStore;
+
 import androidx.annotation.NonNull;
 
 import java.io.File;
@@ -141,33 +142,33 @@ public class MediaIntents
 
 	public MediaIntents newPlayMediaIntent(Uri uri, String type)
 	{
-		Intent intent = new Intent(Intent.ACTION_VIEW);
+		 intent = new Intent(Intent.ACTION_VIEW);
 		intent.setDataAndType(uri, type);
-		this.intent = intent;
+
 		return this;
 	}
 
 	public MediaIntents newTakePictureIntent(File tempFile)
 	{
-		Intent intent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
+		 intent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
 		intent.putExtra(MediaStore.EXTRA_OUTPUT, Uri.fromFile(tempFile));
-		this.intent = intent;
+
 		return this;
 	}
 
 	public MediaIntents newTakePictureIntent(String tempFile)
 	{
-		Intent intent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
+		intent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
 		intent.putExtra(MediaStore.EXTRA_OUTPUT, Uri.fromFile(new File(tempFile)));
-		this.intent = intent;
+
 		return this;
 	}
 
 	public MediaIntents newSelectPictureIntent()
 	{
-		Intent intent = new Intent(Intent.ACTION_PICK);
+		 intent = new Intent(Intent.ACTION_PICK);
 		intent.setType("image/*");
-		this.intent = intent;
+
 		return this;
 	}
 
@@ -185,17 +186,9 @@ public class MediaIntents
 		context.startActivity(intent);
 	}
 
-	public boolean show()
+	public void show()
 	{
-		Intent mediaIntent = build();
-		try
-		{
-			startActivity(mediaIntent);
-		} catch (ActivityNotFoundException e)
-		{
-			return false;
-		}
-		return true;
+		startActivity(build());
 	}
 
 	public static Intent playAMediaFile(Uri file, Uri content, String http/*This is URL*/)

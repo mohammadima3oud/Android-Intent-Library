@@ -1,10 +1,10 @@
 package com.next.androidintentlibrary;
 
 import android.app.Activity;
-import android.content.ActivityNotFoundException;
 import android.content.Context;
 import android.content.Intent;
 import android.net.Uri;
+
 import androidx.annotation.NonNull;
 
 import java.io.File;
@@ -14,7 +14,7 @@ public class MusicIntents
 	private Context context;
 	private Intent intent;
 
-	MusicIntents(Context context)
+	private MusicIntents(Context context)
 	{
 		this.context = context;
 	}
@@ -69,16 +69,8 @@ public class MusicIntents
 		context.startActivity(intent);
 	}
 
-	public boolean show()
+	public void show()
 	{
-		Intent musicIntent = build();
-		try
-		{
-			startActivity(musicIntent);
-		} catch (ActivityNotFoundException e)
-		{
-			return false;
-		}
-		return true;
+		startActivity(build());
 	}
 }

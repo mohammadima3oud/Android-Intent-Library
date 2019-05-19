@@ -6,7 +6,9 @@ import android.content.Context;
 import android.content.Intent;
 import android.net.Uri;
 import android.provider.Settings;
+
 import androidx.annotation.NonNull;
+
 import android.text.TextUtils;
 
 import java.util.Locale;
@@ -87,7 +89,6 @@ public class GeoIntents
 	{
 		StringBuilder sb = new StringBuilder();
 		sb.append("google.navigation:q=");
-
 		sb.append(latitude);
 		sb.append(",");
 		sb.append(longitude);
@@ -114,20 +115,13 @@ public class GeoIntents
 	public GeoIntents newStreetViewIntent(float latitude, float longitude, Float yaw, Integer pitch, Float zoom, Integer mapZoom)
 	{
 		StringBuilder builder = new StringBuilder("google.streetview:cbll=").append(latitude).append(",").append(longitude);
+		String cbpParam = String.format("%s,,%s,%s",
+				yaw == null ? "" : yaw,
+				pitch == null ? "" : pitch,
+				zoom == null ? "" : zoom);
+		builder.append("&cbp=1,").append(cbpParam);
+		builder.append("&mz=").append(mapZoom);
 
-		if (yaw != null || pitch != null || zoom != null)
-		{
-			String cbpParam = String.format("%s,,%s,%s",
-					yaw == null ? "" : yaw,
-					pitch == null ? "" : pitch,
-					zoom == null ? "" : zoom);
-
-			builder.append("&cbp=1,").append(cbpParam);
-		}
-		if (mapZoom != null)
-		{
-			builder.append("&mz=").append(mapZoom);
-		}
 
 		Intent intent = new Intent();
 		intent.setAction(Intent.ACTION_VIEW);
@@ -140,15 +134,9 @@ public class GeoIntents
 	public GeoIntents showStreetView(float latitude, float longitude, Float yaw, Integer pitch, Float zoom, Integer mapZoom)
 	{
 		StringBuilder builder = new StringBuilder("google.streetview:cbll=").append(latitude).append(",").append(longitude);
-		if (yaw != null || pitch != null || zoom != null)
-		{
-			String cbpParam = String.format("%s,,%s,%s", yaw == null ? "" : yaw, pitch == null ? "" : pitch, zoom == null ? "" : zoom);
-			builder.append("&cbp=1,").append(cbpParam);
-		}
-		if (mapZoom != null)
-		{
-			builder.append("&mz=").append(mapZoom);
-		}
+		String cbpParam = String.format("%s,,%s,%s", yaw == null ? "" : yaw, pitch == null ? "" : pitch, zoom == null ? "" : zoom);
+		builder.append("&cbp=1,").append(cbpParam);
+		builder.append("&mz=").append(mapZoom);
 
 		intent = new Intent();
 		intent.setAction(Intent.ACTION_VIEW);
@@ -161,10 +149,7 @@ public class GeoIntents
 		intent = new Intent();
 		intent.setAction(Intent.ACTION_VIEW);
 		String data = String.format("geo:%s,%s", latitude, longitude);
-		if (zoomLevel != null)
-		{
-			data = String.format("%s?z=%s", data, zoomLevel);
-		}
+		data = String.format("%s?z=%s", data, zoomLevel);
 		intent.setData(Uri.parse(data));
 		return this;
 	}
@@ -185,6 +170,21 @@ public class GeoIntents
 		return this;
 	}
 
+	public GeoIntents googleMapIntents()
+	{
+		String uri = String.format(Locale.ENGLISH, "http://maps.google.com/maps?q=loc:%f,%f", 28.43242324, 77.8977673);
+		intent = new Intent(Intent.ACTION_VIEW, Uri.parse(uri));
+		return this;
+	}
+
+	// TODO: 8/30/2017  What is the uri how i can fill it
+	public GeoIntents showALocationOnMap(Uri geoLocation)
+	{
+		intent = new Intent(Intent.ACTION_VIEW);
+		intent.setData(geoLocation);
+		return this;
+	}
+
 	public Intent build()
 	{
 		return intent;
@@ -199,31 +199,8 @@ public class GeoIntents
 		context.startActivity(intent);
 	}
 
-	public boolean show()
+	public void show()
 	{
-		Intent geoIntent = build();
-		try
-		{
-			startActivity(geoIntent);
-		} catch (ActivityNotFoundException e)
-		{
-			return false;
-		}
-		return true;
-	}
-
-	public static Intent googleMapIntents()
-	{
-		String uri = String.format(Locale.ENGLISH, "http://maps.google.com/maps?q=loc:%f,%f", 28.43242324, 77.8977673);
-
-		return new Intent(Intent.ACTION_VIEW, Uri.parse(uri));
-	}
-
-	// TODO: 8/30/2017  What is the uri how i can fill it
-	public static Intent showALocationOnMap(Uri geoLocation)
-	{
-		Intent intent = new Intent(Intent.ACTION_VIEW);
-		intent.setData(geoLocation);
-		return intent;
+		startActivity(build());
 	}
 }

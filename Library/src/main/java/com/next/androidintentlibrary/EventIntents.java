@@ -5,6 +5,7 @@ import android.content.ActivityNotFoundException;
 import android.content.Context;
 import android.content.Intent;
 import android.provider.CalendarContract;
+
 import androidx.annotation.NonNull;
 
 public class EventIntents
@@ -12,7 +13,7 @@ public class EventIntents
 	private Context context;
 	private Intent intent;
 
-	EventIntents(Context context)
+	private EventIntents(Context context)
 	{
 		this.context = context;
 	}
@@ -22,16 +23,7 @@ public class EventIntents
 		return new EventIntents(context);
 	}
 
-	public EventIntents openIntent(String category)
-	{
-		intent = new Intent();
-		intent.setAction(Intent.ACTION_MAIN);
-		intent.addCategory(category);
-		intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-		return this;
-	}
-
-	public EventIntents openEventIntent(String title, String description, String location, long begin, long end, int color, boolean allDay)
+	public EventIntents createEvent(String title, String description, String location, long begin, long end, int color, boolean allDay)
 	{
 		intent = new Intent(Intent.ACTION_INSERT);
 		intent.setData(CalendarContract.Events.CONTENT_URI);
@@ -60,16 +52,8 @@ public class EventIntents
 		context.startActivity(intent);
 	}
 
-	public boolean show()
+	public void show()
 	{
-		Intent eventIntent = build();
-		try
-		{
-			startActivity(eventIntent);
-		} catch (ActivityNotFoundException e)
-		{
-			return false;
-		}
-		return true;
+		startActivity(build());
 	}
 }

@@ -4,6 +4,7 @@ import android.app.Activity;
 import android.content.ActivityNotFoundException;
 import android.content.Context;
 import android.content.Intent;
+
 import androidx.annotation.NonNull;
 
 public class NoteIntents
@@ -11,7 +12,7 @@ public class NoteIntents
 	private Context context;
 	private Intent intent;
 
-	NoteIntents(Context context)
+	private NoteIntents(Context context)
 	{
 		this.context = context;
 	}
@@ -22,10 +23,10 @@ public class NoteIntents
 	}
 
 	// TODO: 8/30/2017 This action "ACTION_CREATE_NOTE" not exist in Intent Actions.
-	public static Intent createANote()
+	public NoteIntents createANote()
 	{
-		Intent intent = new Intent();//ACTION_CREATE_NOTE
-		return intent;
+		intent = new Intent();//ACTION_CREATE_NOTE
+		return this;
 	}
 
 	public Intent build()
@@ -42,16 +43,8 @@ public class NoteIntents
 		context.startActivity(intent);
 	}
 
-	public boolean show()
+	public void show()
 	{
-		Intent noteIntent = build();
-		try
-		{
-			startActivity(noteIntent);
-		} catch (ActivityNotFoundException e)
-		{
-			return false;
-		}
-		return true;
+		startActivity(build());
 	}
 }

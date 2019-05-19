@@ -5,6 +5,7 @@ import android.content.ActivityNotFoundException;
 import android.content.Context;
 import android.content.Intent;
 import android.net.Uri;
+
 import androidx.annotation.NonNull;
 
 import java.io.File;
@@ -14,7 +15,7 @@ public class TextIntents
 	private Context context;
 	Intent intent;
 
-	TextIntents(Context context)
+	private TextIntents(Context context)
 	{
 		this.context = context;
 	}
@@ -60,16 +61,8 @@ public class TextIntents
 		context.startActivity(intent);
 	}
 
-	public boolean show()
+	public void show()
 	{
-		Intent textIntent = build();
-		try
-		{
-			startActivity(textIntent);
-		} catch (ActivityNotFoundException e)
-		{
-			return false;
-		}
-		return true;
+		startActivity(build());
 	}
 }

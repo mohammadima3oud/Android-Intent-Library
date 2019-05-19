@@ -1,10 +1,10 @@
 package com.next.androidintentlibrary;
 
 import android.app.Activity;
-import android.content.ActivityNotFoundException;
 import android.content.Context;
 import android.content.Intent;
 import androidx.annotation.NonNull;
+
 import android.text.TextUtils;
 
 public class ShareIntents
@@ -69,16 +69,8 @@ public class ShareIntents
 		context.startActivity(intent);
 	}
 
-	public boolean show()
+	public void show()
 	{
-		Intent shareIntent = build();
-		try
-		{
-			startActivity(shareIntent);
-		} catch (ActivityNotFoundException e)
-		{
-			return false;
-		}
-		return true;
+		startActivity(build());
 	}
 }
