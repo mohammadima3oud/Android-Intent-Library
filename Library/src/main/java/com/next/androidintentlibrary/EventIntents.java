@@ -23,6 +23,15 @@ public class EventIntents
 		return new EventIntents(context);
 	}
 
+	public EventIntents createEvent(String title, String description)
+	{
+		intent = new Intent(Intent.ACTION_EDIT);
+		intent.setType("vnd.android.cursor.item/event");
+		intent.putExtra("title", title);
+		intent.putExtra("description", description);
+		return this;
+	}
+
 	public EventIntents createEvent(String title, String description, String location, long begin, long end, int color, boolean allDay)
 	{
 		intent = new Intent(Intent.ACTION_INSERT);

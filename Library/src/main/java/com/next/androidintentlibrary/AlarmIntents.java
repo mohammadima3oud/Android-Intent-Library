@@ -24,10 +24,8 @@ public class AlarmIntents
 		return new AlarmIntents(context);
 	}
 
-	// NOTE: requires com.android.alarm.permission.SET_ALARM permission
 	public AlarmIntents createAlarm(String message, int hour, int minutes, boolean skipUi)
 	{
-		// create alarm
 		intent = new Intent(AlarmClock.ACTION_SET_ALARM);
 		intent.putExtra(AlarmClock.EXTRA_MESSAGE, message);
 		intent.putExtra(AlarmClock.EXTRA_HOUR, hour);
@@ -36,43 +34,33 @@ public class AlarmIntents
 		return this;
 	}
 
-	// NOTE: requires com.android.alarm.permission.SET_ALARM permission
-	@RequiresApi(api = Build.VERSION_CODES.KITKAT)
-	public AlarmIntents createAlarm(String message, int hour, int minutes, boolean vibrate, boolean skipUi)
+	public AlarmIntents createAlarm(String message, int hour, int minutes, boolean skipUi, boolean vibrate)
 	{
-		// create alarm
 		intent = new Intent(AlarmClock.ACTION_SET_ALARM);
 		intent.putExtra(AlarmClock.EXTRA_MESSAGE, message);
 		intent.putExtra(AlarmClock.EXTRA_HOUR, hour);
 		intent.putExtra(AlarmClock.EXTRA_MINUTES, minutes);
-
 		intent.putExtra(AlarmClock.EXTRA_VIBRATE, vibrate);
-		// TODO: intent.putExtra(AlarmClock.EXTRA_DAYS, days);
-		// TODO: intent.putExtra(AlarmClock.EXTRA_RINGTONE, ringtone);
-
 		intent.putExtra(AlarmClock.EXTRA_SKIP_UI, skipUi);
 		return this;
 	}
 
-	// NOTE: requires com.android.alarm.permission.SET_ALARM permission
 	@RequiresApi(api = Build.VERSION_CODES.M)
-	public AlarmIntents createAlarm(String message, int hour, int minutes, boolean vibrate, boolean isPm, boolean skipUi)
+	public AlarmIntents createAlarm(String message, int hour, int minutes, boolean skipUi, boolean vibrate, boolean isPm)
 	{
-		// create alarm
 		intent = new Intent(AlarmClock.ACTION_SET_ALARM);
 		intent.putExtra(AlarmClock.EXTRA_MESSAGE, message);
 		intent.putExtra(AlarmClock.EXTRA_HOUR, hour);
 		intent.putExtra(AlarmClock.EXTRA_MINUTES, minutes);
-
 		intent.putExtra(AlarmClock.EXTRA_VIBRATE, vibrate);
-		// TODO: intent.putExtra(AlarmClock.EXTRA_DAYS, days);
-		// TODO: intent.putExtra(AlarmClock.EXTRA_RINGTONE, ringtone);
 		intent.putExtra(AlarmClock.EXTRA_IS_PM, isPm);
 		intent.putExtra(AlarmClock.EXTRA_SKIP_UI, skipUi);
+		// TODO: add below overloads too
+		// intent.putExtra(AlarmClock.EXTRA_DAYS, days);
+		// intent.putExtra(AlarmClock.EXTRA_RINGTONE, ringtone);
 		return this;
 	}
 
-	@RequiresApi(api = Build.VERSION_CODES.KITKAT)
 	public AlarmIntents showAlarms()
 	{
 		intent = new Intent(AlarmClock.ACTION_SHOW_ALARMS);

@@ -1,7 +1,6 @@
 package com.next.androidintentlibrary;
 
 import android.app.Activity;
-import android.content.ActivityNotFoundException;
 import android.content.ContentUris;
 import android.content.Context;
 import android.content.Intent;
@@ -10,15 +9,9 @@ import android.net.Uri;
 import android.provider.ContactsContract;
 
 import androidx.annotation.NonNull;
-import androidx.appcompat.app.AppCompatActivity;
-
-import android.text.TextUtils;
-import android.widget.Toast;
 
 public class ContactIntents
 {
-	public static final int REQUEST_SELECT_CONTACT = 5;
-	public static final int REQUEST_SELECT_PHONE_NUMBER = 6;
 	private Context context;
 	private Intent intent;
 
@@ -41,24 +34,24 @@ public class ContactIntents
 		return this;
 	}
 
-	// TODO: requires start activity for result, on activity result, should only be used with build not show
-	public void selectContact()
+	public ContactIntents pickContact()
 	{
-		Intent intent = new Intent(Intent.ACTION_PICK);
+		intent = new Intent(Intent.ACTION_PICK);
 		intent.setType(ContactsContract.Contacts.CONTENT_TYPE);
-		if (intent.resolveActivity(context.getPackageManager()) == null)
-			Toast.makeText(context, "No Activity Was Found To Handle This Intent", Toast.LENGTH_LONG).show();
-		else
-			((AppCompatActivity) context).startActivityForResult(intent, REQUEST_SELECT_CONTACT);
+		// or
+		// intent.setType(ContactsContract.CommonDataKinds.Phone.CONTENT_TYPE);
+		return this;
 	}
 
-	// TODO: requires start activity for result, on activity result, should only be used with build not show
-	public ContactIntents selectSpecificContactData()
+	public ContactIntents pickSpecificContactData()
 	{
 		intent = new Intent(Intent.ACTION_PICK);
 		intent.setType(ContactsContract.CommonDataKinds.Phone.CONTENT_TYPE);
 		//intent.setType(ContactsContract.CommonDataKinds.Email.CONTENT_TYPE);
 		//intent.setType(ContactsContract.CommonDataKinds.StructuredPostal.CONTENT_TYPE);
+
+		// or
+		// intent = new Intent(Intent.ACTION_PICK, Uri.parse("content://com.android.contacts/contacts"));
 		return this;
 	}
 
@@ -116,26 +109,6 @@ public class ContactIntents
 		}
 		Uri contactUri = ContentUris.withAppendedId(ContactsContract.Contacts.CONTENT_URI, idFindedContact);
 		return contactUri;
-	}
-
-	// TODO: requires start activity for result, on activity result, should only be used with build not show
-	public ContactIntents pickContact()
-	{
-		intent = new Intent(Intent.ACTION_PICK);
-		intent.setType(ContactsContract.CommonDataKinds.Phone.CONTENT_TYPE);
-		return this;
-	}
-
-	// TODO: requires start activity for result, on activity result, should only be used with build not show
-	public ContactIntents pickContact(String scope)
-	{
-		intent = new Intent(Intent.ACTION_PICK, Uri.parse("content://com.android.contacts/contacts"));
-
-		if (!TextUtils.isEmpty(scope))
-		{
-			intent.setType(scope);
-		}
-		return this;
 	}
 
 	public Intent build()

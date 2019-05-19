@@ -1,6 +1,6 @@
 package com.next.androidintents;
 
-import androidx.annotation.RequiresApi;
+import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.ContentUris;
@@ -11,6 +11,7 @@ import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
 import android.provider.ContactsContract;
+import android.util.Log;
 
 import com.next.androidintentlibrary.AlarmIntents;
 import com.next.androidintentlibrary.BrowserIntents;
@@ -22,6 +23,7 @@ import com.next.androidintentlibrary.EventIntents;
 import com.next.androidintentlibrary.GalleryIntents;
 import com.next.androidintentlibrary.MarketIntents;
 import com.next.androidintentlibrary.PhoneIntents;
+import com.next.androidintentlibrary.RequestTag;
 import com.next.androidintentlibrary.SettingIntents;
 import com.next.androidintentlibrary.ShareIntents;
 import com.next.androidintentlibrary.TimerIntents;
@@ -30,8 +32,6 @@ import java.net.URL;
 
 public class MainActivity extends AppCompatActivity
 {
-
-	@RequiresApi(api = Build.VERSION_CODES.M)
 	@Override
 	protected void onCreate(Bundle savedInstanceState)
 	{
@@ -40,8 +40,9 @@ public class MainActivity extends AppCompatActivity
 
 		// Alarm
 		// AlarmIntents.from(this).showAlarms().show();
-		// AlarmIntents.from(this).createAlarm("Wake up", 6, 30, false, false).show();
-		// AlarmIntents.from(this).createAlarm("Wake up", 6, 30, false, false, false).show();
+		// AlarmIntents.from(this).createAlarm("Wake up", 6, 30, false).show(); // NOTE: requires com.android.alarm.permission.SET_ALARM
+		// AlarmIntents.from(this).createAlarm("Wake up", 6, 30, false, false).show(); // NOTE: requires com.android.alarm.permission.SET_ALARM
+		// AlarmIntents.from(this).createAlarm("Wake up", 6, 30, false, false, false).show(); // NOTE: requires com.android.alarm.permission.SET_ALARM
 
 		// Browser
 		// BrowserIntents.from(this).openBrowser().show();
@@ -54,18 +55,17 @@ public class MainActivity extends AppCompatActivity
 
 		// Calendar
 		// CalendarIntents.from(this).openCalendar().show();
-		// CalendarIntents.from(this).createEvent("Movie","Watch Avenger End Games").show();
 
 		// Camera (TODO: test)
 
 		// Contact
 		// ContactIntents.from(this).openContacts().show();
-		// ContactIntents.from(this).viewContact("Ahmad").show();
-		// ContactIntents.from(this).insertContact("Emiley", "0913234235", "", "", "", "").show();
-		// ContactIntents.from(this).editContact("Ahmad").show();
-		// ContactIntents.from(this).editContact("Ahmad", "a2bad@gmail.com").show();
-		// ContactIntents.from(this).pickContact().show();
-		// ContactIntents.from(this).pickContact(null).show();
+		// ContactIntents.from(this).viewContact("Ahmad").show(); // Note: requires android.permission.READ_CONTACTS
+		// ContactIntents.from(this).insertContact("Emiley", "0913234235", "", "", "", "").show(); // Note: requires android.permission.WRITE_CONTACTS
+		// ContactIntents.from(this).editContact("Ahmad").show(); // Note: requires android.permission.WRITE_CONTACTS
+		// ContactIntents.from(this).editContact("Ahmad", "a2bad@gmail.com").show(); // Note: requires android.permission.WRITE_CONTACTS
+		// startActivityForResult(ContactIntents.from(this).pickContact().build(), RequestTag.PICK_CONTACT);
+		// startActivityForResult(ContactIntents.from(this).pickSpecificContactData().build(), RequestTag.PICK_SPECIFIC_CONTACT_DATA);
 
 		// Email
 		// EmailIntents.from(this).openEmail().show();
@@ -74,6 +74,7 @@ public class MainActivity extends AppCompatActivity
 		// EmailIntents.from(this).composeAnEmailSend(new String[]{"a2bad@gmail.com"}, new String[]{"a3bad@gmail.com"}, new String[]{"a4bad@gmail.com"}, "Work", "Please send your resume").show();
 
 		// Event
+		// EventIntents.from(this).createEvent("Movie","Watch Avenger End Games").show();
 		// EventIntents.from(this).createEvent("Birthday", "Buy a cake", "UK", 3600, 7200, Color.BLUE, true).show();
 
 		// File (TODO: test)
@@ -122,8 +123,7 @@ public class MainActivity extends AppCompatActivity
 		// SettingIntents.from(this).accessibilitySetting().show();
 		// SettingIntents.from(this).applicationSetting().show();
 		// SettingIntents.from(this).airplaneModeSetting().show();
-		// Warning: requires bluetooth permission
-		// SettingIntents.from(this).bluetoothSetting().show();
+		// SettingIntents.from(this).bluetoothSetting().show(); // Note: requires android.permission.BLUETOOTH_ADMIN permission
 		// SettingIntents.from(this).captioningSetting().show();
 		// SettingIntents.from(this).castSetting().show();
 		// SettingIntents.from(this).dateSetting().show();
@@ -178,5 +178,20 @@ public class MainActivity extends AppCompatActivity
 		// Timer
 //		TimerIntents.from(this).createTimer("Run", 200, false).show();
 
+	}
+
+	@Override
+	protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data)
+	{
+		super.onActivityResult(requestCode, resultCode, data);
+		switch (requestCode)
+		{
+			case RequestTag.PICK_CONTACT:
+				Log.i("Android-Intent-Library", "Picked Contact");
+				break;
+			case RequestTag.PICK_SPECIFIC_CONTACT_DATA:
+				Log.i("Android-Intent-Library", "Picked Specific Contact Data");
+				break;
+		}
 	}
 }
