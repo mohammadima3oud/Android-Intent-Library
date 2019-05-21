@@ -15,7 +15,7 @@ And add the library to your module **build.gradle**:
 
 ```Gradle
 dependencies {
-    implementation 'com.github.ma3udmohammadi:Android-Intent-Library:0.2.2'
+    implementation 'com.github.ma3udmohammadi:Android-Intent-Library:1.0.0'
 }
 ```
 
@@ -197,35 +197,30 @@ startActivity(SettingIntents.from(this).applicationSetting().build());
   ```
 * ### MusicIntents
   ```Java
-  
+  openPlayMusic()
   ```
   Example
   ```Java
-  
-  ```
-* ### NoteIntents
-  ```Java
-  
-  ```
-  Example
-  ```Java
-  
+  MusicIntents.from(this).openPlayMusic().show();
   ```
 * ### PhoneIntents
   ```Java
-  
+  showDialNumber()
+  showDialNumber(String phoneNumber)
+  callNumber(String phoneNumber)
   ```
   Example
   ```Java
-  
+  PhoneIntents.from(this).showDialNumber().show();
   ```
 * ### SearchIntents
   ```Java
-  
+  searchInGooglePlay(String query)
+  searchWeb(String query)
   ```
   Example
   ```Java
-  
+  SearchIntents.from(this).searchInGooglePlay("Instagram").show();
   ```
 * ### SettingIntents
   ```Java
@@ -287,19 +282,12 @@ startActivity(SettingIntents.from(this).applicationSetting().build());
   ```
 * ### ShareIntents
   ```Java
-  
+  shareText(String subject, String message)
+  shareText(String subject, String message, String chooserDialogTitle)
   ```
   Example
   ```Java
-  
-  ```
-* ### TextIntents
-  ```Java
-  
-  ```
-  Example
-  ```Java
-  
+  ShareIntents.from(this).shareText("Subject example","message example").show();
   ```
 * ### TimerIntents
   ```Java
@@ -309,3 +297,19 @@ startActivity(SettingIntents.from(this).applicationSetting().build());
   ```Java
   TimerIntents.from(this).createTimer("Run", 180, false).show();
   ```
+* ### VoiceRecorderIntents
+  ```Java
+  openVoiceRecorder()
+  ```
+  Example
+  ```Java
+  startActivityForResult(VoiceRecorderIntents.from(this).openVoiceRecorder().build(), RequestTag.RECORD_VOICE);
+  ```
+  
+Note: some intents will return data, which should be handeled in onActivityResult, use .build and startActivityForResult for them.
+  Example
+  ```Java
+  startActivityForResult(VoiceRecorderIntents.from(this).openVoiceRecorder().build(), RequestTag.RECORD_VOICE);
+  ```
+  
+Note: Android-Intent-Library doesn't handle the returned data, you need to handle them your self in onActivityResult.
