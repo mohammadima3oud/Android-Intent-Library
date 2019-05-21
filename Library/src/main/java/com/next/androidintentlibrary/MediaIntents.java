@@ -5,7 +5,6 @@ import android.content.ActivityNotFoundException;
 import android.content.Context;
 import android.content.Intent;
 import android.net.Uri;
-import android.provider.MediaStore;
 
 import androidx.annotation.NonNull;
 
@@ -13,12 +12,11 @@ import java.io.File;
 
 public class MediaIntents
 {
-	// TODO: separate into VideoIntents, MusicIntents, ImageIntents
 	private Context context;
 	private Intent intent;
-	public static final String AUDIO_TYPE = "audio/*";
-	public static final String VIDEO_TYPE = "video/*";
-	public static final String IMAGE_TYPE = "image/*";
+	private static final String AUDIO_TYPE = "audio/*";
+	private static final String VIDEO_TYPE = "video/*";
+	private static final String IMAGE_TYPE = "image/*";
 
 	private MediaIntents(@NonNull Context context)
 	{
@@ -30,89 +28,58 @@ public class MediaIntents
 		return new MediaIntents(context);
 	}
 
-	public MediaIntents newPlayAudioFileIntent(File file)
+	// TODO:
+	private MediaIntents playAudioFile(String path)
 	{
-		return newPlayMediaFileIntent(file, AUDIO_TYPE);
+		return playMediaFile(path, AUDIO_TYPE);
 	}
 
-	public MediaIntents newPlayAudioFileIntent(String path)
+	// TODO:
+	private MediaIntents playAudioFile(File file)
 	{
-		return newPlayMediaFileIntent(path, AUDIO_TYPE);
+		return playMediaFile(file, AUDIO_TYPE);
 	}
 
-	public MediaIntents newPlayAudioIntent(String url)
+	public MediaIntents playAudio(String url)
 	{
-		return newPlayMediaIntent(url, AUDIO_TYPE);
+		return playMedia(url, AUDIO_TYPE);
 	}
 
-	public MediaIntents newPlayImageFileIntent(File file)
+	// TODO:
+	private MediaIntents showImageFile(String path)
 	{
-		return newPlayMediaFileIntent(file, IMAGE_TYPE);
+		return playMediaFile(path, IMAGE_TYPE);
 	}
 
-	public MediaIntents newPlayImageFileIntent(String path)
+	// TODO:
+	private MediaIntents showImageFile(File file)
 	{
-		return newPlayMediaFileIntent(path, IMAGE_TYPE);
+		return playMediaFile(file, IMAGE_TYPE);
 	}
 
-	public MediaIntents newPlayImageIntent(String url)
+	public MediaIntents showImage(String url)
 	{
-		return newPlayMediaIntent(url, IMAGE_TYPE);
+		return playMedia(url, IMAGE_TYPE);
 	}
 
-	public MediaIntents newPlayVideoFileIntent(File file)
+	// TODO:
+	private MediaIntents playVideoFile(File file)
 	{
-		return newPlayMediaFileIntent(file, VIDEO_TYPE);
+		return playMediaFile(file, VIDEO_TYPE);
 	}
 
-	public MediaIntents newPlayVideoFileIntent(String path)
+	// TODO:
+	private MediaIntents playVideoFile(String path)
 	{
-		return newPlayMediaFileIntent(path, VIDEO_TYPE);
+		return playMediaFile(path, VIDEO_TYPE);
 	}
 
-	public MediaIntents newPlayVideoIntent(String url)
+	public MediaIntents playVideo(String url)
 	{
-		return newPlayMediaIntent(url, VIDEO_TYPE);
+		return playMedia(url, VIDEO_TYPE);
 	}
 
-	public MediaIntents openVideo(File file)
-	{
-		return openVideo(Uri.fromFile(file));
-	}
-
-	public MediaIntents openVideo(String file)
-	{
-		return openVideo(new File(file));
-	}
-
-	public MediaIntents openVideo(Uri uri)
-	{
-		return openMedia(uri, "video/*");
-	}
-
-	public MediaIntents openImage(String file)
-	{
-		return openImage(new File(file));
-	}
-
-	public MediaIntents openImage(File file)
-	{
-		return openImage(Uri.fromFile(file));
-	}
-
-	public MediaIntents openImage(Uri uri)
-	{
-		return openMedia(uri, "image/*");
-	}
-
-	private MediaIntents openMedia(Uri uri, String mimeType)
-	{
-		intent = new Intent(Intent.ACTION_VIEW);
-		intent.setDataAndType(uri, mimeType);
-		return this;
-	}
-
-	public MediaIntents newPlayYouTubeVideoIntent(String videoId)
+	public MediaIntents playYouTubeVideo(String videoId)
 	{
 		try
 		{
@@ -125,50 +92,25 @@ public class MediaIntents
 		}
 	}
 
-	public MediaIntents newPlayMediaIntent(String url, String type)
+	private MediaIntents playMedia(String url, String type)
 	{
-		return newPlayMediaIntent(Uri.parse(url), type);
+		return playMedia(Uri.parse(url), type);
 	}
 
-	public MediaIntents newPlayMediaFileIntent(File file, String type)
+	private MediaIntents playMediaFile(File file, String type)
 	{
-		return newPlayMediaIntent(Uri.fromFile(file), type);
+		return playMedia(Uri.fromFile(file), type);
 	}
 
-	public MediaIntents newPlayMediaFileIntent(String path, String type)
+	private MediaIntents playMediaFile(String path, String type)
 	{
-		return newPlayMediaIntent(Uri.fromFile(new File(path)), type);
+		return playMedia(Uri.fromFile(new File(path)), type);
 	}
 
-	public MediaIntents newPlayMediaIntent(Uri uri, String type)
+	private MediaIntents playMedia(Uri uri, String type)
 	{
-		 intent = new Intent(Intent.ACTION_VIEW);
+		intent = new Intent(Intent.ACTION_VIEW);
 		intent.setDataAndType(uri, type);
-
-		return this;
-	}
-
-	public MediaIntents newTakePictureIntent(File tempFile)
-	{
-		 intent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
-		intent.putExtra(MediaStore.EXTRA_OUTPUT, Uri.fromFile(tempFile));
-
-		return this;
-	}
-
-	public MediaIntents newTakePictureIntent(String tempFile)
-	{
-		intent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
-		intent.putExtra(MediaStore.EXTRA_OUTPUT, Uri.fromFile(new File(tempFile)));
-
-		return this;
-	}
-
-	public MediaIntents newSelectPictureIntent()
-	{
-		 intent = new Intent(Intent.ACTION_PICK);
-		intent.setType("image/*");
-
 		return this;
 	}
 
@@ -189,19 +131,5 @@ public class MediaIntents
 	public void show()
 	{
 		startActivity(build());
-	}
-
-	public static Intent playAMediaFile(Uri file, Uri content, String http/*This is URL*/)
-	{
-		Uri webPage = Uri.parse(http);
-		Intent intent = new Intent(Intent.ACTION_VIEW);
-		intent.setData(file);
-		//intent.setData(content);
-		//intent.setData(webPage); // TODO: 8/30/2017 setData Method Not Support URL Converted to Uri.
-		intent.setType("audio/*");
-		//intent.setType("application/ogg");
-		//intent.setType("application/x-ogg");
-		//intent.setType("application/itunes");
-		return intent;
 	}
 }

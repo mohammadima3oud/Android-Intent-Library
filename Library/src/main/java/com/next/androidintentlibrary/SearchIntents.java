@@ -22,14 +22,14 @@ public class SearchIntents
 		return new SearchIntents(context);
 	}
 
-	public SearchIntents search(String query)
+	public SearchIntents searchInGooglePlay(String query)
 	{
 		intent = new Intent("com.google.android.gms.actions.SEARCH_ACTION");
 		intent.putExtra(SearchManager.QUERY, query);
 		return this;
 	}
 
-	public SearchIntents performWebSearch(String query)
+	public SearchIntents searchWeb(String query)
 	{
 		intent = new Intent(Intent.ACTION_WEB_SEARCH);
 		intent.putExtra(SearchManager.QUERY, query);

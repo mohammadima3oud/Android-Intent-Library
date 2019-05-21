@@ -1,6 +1,7 @@
 package com.next.androidintentlibrary;
 
 import android.app.Activity;
+import android.app.SearchManager;
 import android.content.Context;
 import android.content.Intent;
 import android.content.pm.PackageManager;
@@ -9,6 +10,7 @@ import android.net.Uri;
 
 import androidx.annotation.NonNull;
 
+import android.os.Build;
 import android.text.TextUtils;
 
 import java.util.List;
@@ -67,16 +69,50 @@ public class MarketIntents
 		return showInIranApps(packageName);
 	}
 
+	// TODO:
+	private MarketIntents googlePlayStoreOurProduct()
+	{
+		String urlApp = "market://search?q=pub:Google+Inc.";
+		String urlWeb = "http://play.google.com/store/search?q=pub:Google+Inc.";
+		intent = null;
+		// TODO:handle it in 2 methods
+		try
+		{
+			Intent i = new Intent(Intent.ACTION_VIEW, Uri.parse(urlApp));
+			setFlags(i);
+			startActivity(i);
+		} catch (android.content.ActivityNotFoundException anfe)
+		{
+			Intent i = new Intent(Intent.ACTION_VIEW, Uri.parse(urlWeb));
+			setFlags(i);
+			startActivity(i);
+		}
+		return this;
+	}
+
+	// part of googlePlayStoreOurProduct()
+	private void setFlags(Intent i)
+	{
+		i.addFlags(Intent.FLAG_ACTIVITY_NO_HISTORY);
+		if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP)
+		{
+			i.addFlags(Intent.FLAG_ACTIVITY_NEW_DOCUMENT);
+		} else
+		{
+			i.addFlags(Intent.FLAG_ACTIVITY_CLEAR_WHEN_TASK_RESET);
+		}
+	}
+
 	public MarketIntents showInMarket(String packageName)
 	{
 		intent = new Intent(Intent.ACTION_VIEW, Uri.parse("market://details?id=" + packageName));
 
-		if (!isIntentAvailable(context, intent))
+		if (!isIntentAvailable(intent))
 		{
 			intent = new Intent(Intent.ACTION_VIEW, Uri.parse("amzn://apps/android?p=" + packageName));
 		}
 
-		if (!isIntentAvailable(context, intent))
+		if (!isIntentAvailable(intent))
 		{
 			intent = null;
 		}
@@ -93,7 +129,7 @@ public class MarketIntents
 	{
 		intent = new Intent(Intent.ACTION_VIEW, Uri.parse("market://details?id=" + packageName));
 		intent.setPackage("com.android.vending");
-		if (!isIntentAvailable(context, intent))
+		if (!isIntentAvailable(intent))
 		{
 			return showInWebBrowser("https://play.google.com/store/apps/details?id=" + packageName);
 		}
@@ -110,7 +146,7 @@ public class MarketIntents
 	{
 		intent = new Intent(Intent.ACTION_VIEW, Uri.parse("amzn://apps/android?p=" + packageName));
 		intent.setPackage("com.android.vending");
-		if (!isIntentAvailable(context, intent))
+		if (!isIntentAvailable(intent))
 		{
 			return showInWebBrowser("http://www.amazon.com/gp/mas/dl/android?p=" + packageName);
 		}
@@ -160,7 +196,14 @@ public class MarketIntents
 		return this;
 	}
 
-	private static boolean isIntentAvailable(Context context, Intent intent)
+	public MarketIntents searchAppInGooglePlay(String appName)
+	{
+		intent = new Intent("com.google.android.gms.actions.SEARCH_ACTION");
+		intent.putExtra(SearchManager.QUERY, appName);
+		return this;
+	}
+
+	private boolean isIntentAvailable(Intent intent)
 	{
 		PackageManager packageManager = context.getPackageManager();
 		List<ResolveInfo> list = packageManager.queryIntentActivities(intent, PackageManager.MATCH_DEFAULT_ONLY);

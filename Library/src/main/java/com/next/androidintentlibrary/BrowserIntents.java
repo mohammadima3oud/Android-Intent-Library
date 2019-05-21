@@ -4,15 +4,14 @@ import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.net.Uri;
+import android.text.TextUtils;
 
 import androidx.annotation.NonNull;
-
-import android.text.TextUtils;
 
 public class BrowserIntents
 {
 	private Context context;
-	protected Intent intent;
+	private Intent intent;
 
 	private BrowserIntents(Context context)
 	{

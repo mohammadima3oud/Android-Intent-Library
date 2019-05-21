@@ -1,31 +1,30 @@
 package com.next.androidintentlibrary;
 
 import android.app.Activity;
-import android.content.ActivityNotFoundException;
 import android.content.Context;
 import android.content.Intent;
+import android.provider.MediaStore;
 
 import androidx.annotation.NonNull;
 
-public class NoteIntents
+public class VoiceRecorderIntents
 {
 	private Context context;
-	private Intent intent;
+	Intent intent;
 
-	private NoteIntents(Context context)
+	private VoiceRecorderIntents(Context context)
 	{
 		this.context = context;
 	}
 
-	public static NoteIntents from(@NonNull Context context)
+	public static VoiceRecorderIntents from(@NonNull Context context)
 	{
-		return new NoteIntents(context);
+		return new VoiceRecorderIntents(context);
 	}
 
-	// TODO: 8/30/2017 This action "ACTION_CREATE_NOTE" not exist in Intent Actions.
-	public NoteIntents createANote()
+	public VoiceRecorderIntents openVoiceRecorder()
 	{
-		intent = new Intent();//ACTION_CREATE_NOTE
+		intent = new Intent(MediaStore.Audio.Media.RECORD_SOUND_ACTION);
 		return this;
 	}
 

@@ -26,42 +26,12 @@ public class FileIntents
 		return new FileIntents(context);
 	}
 
-	public FileIntents retrievAnSpecificTypeOfFile(Boolean allowMultiple, Boolean localOnly)
+	public FileIntents fileChooser()
 	{
 		intent = new Intent(Intent.ACTION_GET_CONTENT);
-		intent.setType("image/*");
-		intent.addCategory(CATEGORY_OPENABLE);
-		intent.putExtra(intent.EXTRA_ALLOW_MULTIPLE, allowMultiple);
-		intent.putExtra(intent.EXTRA_LOCAL_ONLY, localOnly);
-		return this;
-	}
-
-	// TODO: 8/30/2017 Error close program
-	@RequiresApi(api = Build.VERSION_CODES.KITKAT)
-	public FileIntents openAnSpecificTypeOfFile(String[] mimeType, Boolean allowMultiple, Boolean localOnly)
-	{
-		intent = new Intent(Intent.ACTION_OPEN_DOCUMENT);
-		// TODO: 8/30/2017 Primary MimeType for Bellow Line Is  "*/*".
-		intent.putExtra(intent.EXTRA_MIME_TYPES, mimeType);
-		intent.putExtra(intent.EXTRA_ALLOW_MULTIPLE, allowMultiple);
-		// TODO: 8/30/2017 I think bellow line used for this Action :  ACTION_CREATE_DOCUMENT
-		//intent.putExtra(intent.EXTRA_TITLE ,allowMultiple);
-		intent.putExtra(intent.EXTRA_LOCAL_ONLY, localOnly);
-		intent.addCategory(CATEGORY_OPENABLE);
-		return this;
-	}
-
-	// TODO: 8/30/2017 Error close program
-	@RequiresApi(api = Build.VERSION_CODES.KITKAT)
-	public FileIntents createAnSpecificTypeOfFile(String[] mimeType, Boolean allowMultiple, String title, Boolean localOnly)
-	{
-		intent = new Intent(Intent.ACTION_OPEN_DOCUMENT);
-		// TODO: 8/30/2017 Primary MimeType for Bellow Line Is  "*/*".
-		intent.putExtra(intent.EXTRA_MIME_TYPES, mimeType);
-		intent.putExtra(intent.EXTRA_ALLOW_MULTIPLE, allowMultiple);
-		intent.putExtra(intent.EXTRA_TITLE, title);
-		intent.putExtra(intent.EXTRA_LOCAL_ONLY, localOnly);
-		intent.addCategory(CATEGORY_OPENABLE);
+		intent.setType("*/*");
+		intent.addCategory(Intent.CATEGORY_OPENABLE);
+		intent.putExtra(Intent.EXTRA_LOCAL_ONLY, true);
 		return this;
 	}
 
@@ -69,6 +39,24 @@ public class FileIntents
 	{
 		intent = new Intent(Intent.ACTION_GET_CONTENT);
 		intent.setType("file/*");
+		return this;
+	}
+
+	public FileIntents pickImageFile()
+	{
+		intent = new Intent(Intent.ACTION_GET_CONTENT);
+		intent.setType("image/*");
+		return this;
+	}
+
+	// TODO: overload for other file types
+	public FileIntents pickImageFile(Boolean allowMultiple, Boolean localOnly)
+	{
+		intent = new Intent(Intent.ACTION_GET_CONTENT);
+		intent.setType("image/*");
+		intent.addCategory(CATEGORY_OPENABLE);
+		intent.putExtra(intent.EXTRA_ALLOW_MULTIPLE, allowMultiple);
+		intent.putExtra(intent.EXTRA_LOCAL_ONLY, localOnly);
 		return this;
 	}
 

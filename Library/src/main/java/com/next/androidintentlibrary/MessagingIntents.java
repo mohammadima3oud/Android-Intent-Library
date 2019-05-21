@@ -10,10 +10,6 @@ import android.text.TextUtils;
 
 import androidx.annotation.NonNull;
 
-import java.util.ArrayList;
-
-import static android.content.Intent.EXTRA_STREAM;
-
 public class MessagingIntents
 {
 	private Context context;
@@ -29,7 +25,7 @@ public class MessagingIntents
 		return new MessagingIntents(context);
 	}
 
-	public MessagingIntents openMessagingIntent()
+	public MessagingIntents openMessages()
 	{
 		intent = new Intent();
 		intent.setAction(Intent.ACTION_MAIN);
@@ -38,97 +34,32 @@ public class MessagingIntents
 		return this;
 	}
 
-	public MessagingIntents composeSMSSend(String subject, String smsBody, Uri stream)
+	public MessagingIntents createEmptySms()
 	{
-		intent = new Intent(Intent.ACTION_SEND);
-		intent.setData(Uri.parse("smsto:"));  // This ensures only SMS apps respond // TODO: 8/30/2017  sms:<phone_number> , smsto:<phone_number> , mms:<phone_number> , mmsto:<phone_number>
-		intent.setType("text/plain");
-		//intent.setType("image/*");
-		//intent.setType("video/*");
-
-		intent.putExtra("subject", subject);
-		intent.putExtra("sms_body", smsBody);
-		intent.putExtra(EXTRA_STREAM, stream);
-		return this;
+		return createSms(null, (String[]) null);
 	}
 
-	public MessagingIntents composeSMSSendTo(String subject, String smsBody, Uri stream)
+	public MessagingIntents createEmptySms(String phoneNumber)
 	{
-		intent = new Intent(Intent.ACTION_SENDTO);
-		// intent.setData() // TODO: 8/30/2017  sms:<phone_number> , smsto:<phone_number> , mms:<phone_number> , mmsto:<phone_number>
-		intent.setType("text/plain");
-		//intent.setType("image/*");
-		//intent.setType("video/*");
-
-		intent.putExtra("subject", subject);
-		intent.putExtra("sms_body", smsBody);
-		intent.putExtra(EXTRA_STREAM, stream);
-		return this;
+		return createSms(null, new String[]{phoneNumber});
 	}
 
-	public MessagingIntents composeSMSMultiple(String subject, String smsBody, ArrayList<Uri> stream)
+	public MessagingIntents createEmptySms(String[] phoneNumbers)
 	{
-		intent = new Intent(Intent.ACTION_SEND_MULTIPLE);
-		// intent.setData() // TODO: 8/30/2017  sms:<phone_number> , smsto:<phone_number> , mms:<phone_number> , mmsto:<phone_number>
-		intent.setType("text/plain");
-		//intent.setType("image/*");
-		//intent.setType("video/*");
-
-		intent.putExtra("subject", subject);
-		intent.putExtra("sms_body", smsBody);
-		intent.putExtra(EXTRA_STREAM, stream);
-		return this;
+		return createSms(null, phoneNumbers);
 	}
 
-	public MessagingIntents sendSms(Context context, String to, String message)
+	public MessagingIntents createSms(String body)
 	{
-		if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT)
-		{
-			String defaultSmsPackageName = Telephony.Sms.getDefaultSmsPackage(context);
-			intent = new Intent(Intent.ACTION_SENDTO, Uri.parse("smsto:" + to));
-			intent.putExtra("sms_body", message);
-			if (defaultSmsPackageName != null)
-			{
-				intent.setPackage(defaultSmsPackageName);
-			}
-			return this;
-		} else
-		{
-			Uri smsUri = Uri.parse("tel:" + to);
-			intent = new Intent(Intent.ACTION_VIEW, smsUri);
-			intent.putExtra("address", to);
-			intent.putExtra("sms_body", message);
-			intent.setType("vnd.android-dir/mms-sms");
-			return this;
-		}
+		return createSms(body, (String[]) null);
 	}
 
-	public MessagingIntents newEmptySmsIntent()
+	public MessagingIntents createSms(String body, String phoneNumber)
 	{
-		return newSmsIntent(null, (String[]) null);
+		return createSms(body, new String[]{phoneNumber});
 	}
 
-	public MessagingIntents newEmptySmsIntent(String phoneNumber)
-	{
-		return newSmsIntent(null, new String[]{phoneNumber});
-	}
-
-	public MessagingIntents newEmptySmsIntent(String[] phoneNumbers)
-	{
-		return newSmsIntent(null, phoneNumbers);
-	}
-
-	public MessagingIntents newSmsIntent(String body)
-	{
-		return newSmsIntent(body, (String[]) null);
-	}
-
-	public MessagingIntents newSmsIntent(String body, String phoneNumber)
-	{
-		return newSmsIntent(body, new String[]{phoneNumber});
-	}
-
-	public MessagingIntents newSmsIntent(String body, String[] phoneNumbers)
+	public MessagingIntents createSms(String body, String[] phoneNumbers)
 	{
 		Uri smsUri;
 		if (phoneNumbers == null || phoneNumbers.length == 0)
@@ -155,39 +86,6 @@ public class MessagingIntents
 		}
 
 		return this;
-	}
-
-	public MessagingIntents openEmptySmsIntent()
-	{
-		return newSmsIntent(null, (String[]) null);
-	}
-
-	public MessagingIntents openSmsNumberIntent(String phoneNumber)
-	{
-		if (phoneNumber != null)
-			return newSmsIntent(null, new String[]{phoneNumber});
-		return null;
-	}
-
-	public MessagingIntents openSmsNumbersIntent(String[] phoneNumbers)
-	{
-		return newSmsIntent(null, phoneNumbers);
-	}
-
-
-	public MessagingIntents openSmsBodyIntent(String body)
-	{
-		return newSmsIntent(body, (String[]) null);
-	}
-
-	public MessagingIntents openSmsNumberBodyIntent(String body, String phoneNumber)
-	{
-		return newSmsIntent(body, new String[]{phoneNumber});
-	}
-
-	public MessagingIntents openSmsNumbersBodyIntent(String body, String[] phoneNumbers)
-	{
-		return newSmsIntent(body, phoneNumbers);
 	}
 
 	public Intent build()

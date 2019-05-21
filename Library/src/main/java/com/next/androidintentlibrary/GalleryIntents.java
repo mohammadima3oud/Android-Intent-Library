@@ -27,6 +27,8 @@ public class GalleryIntents
 		intent.setAction(Intent.ACTION_MAIN);
 		intent.addCategory(Intent.CATEGORY_APP_GALLERY);
 		intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+		// or
+		// intent = new Intent(Intent.ACTION_PICK, android.provider.MediaStore.Images.Media.EXTERNAL_CONTENT_URI));
 		return this;
 	}
 
