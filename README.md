@@ -76,11 +76,14 @@ startActivity(SettingIntents.from(this).applicationSetting().build());
   ```
 * ### CameraIntents
   ```Java
-  
+  openPhotoCamera()
+  openVideoCamera()
+  capturePhoto(Uri location, String fileName)
+  captureVideo(Uri location, String fileName)
   ```
   Example
   ```Java
-  
+  startActivityForResult(CameraIntents.from(this).openPhotoCamera().build(), RequestTag.IMAGE_CAMERA);
   ```
 * ### ContactIntents
   ```Java
@@ -118,11 +121,14 @@ startActivity(SettingIntents.from(this).applicationSetting().build());
   ```
 * ### FileIntents
   ```Java
-  
+  fileChooser()
+  pickFile()
+  pickImageFile()
+  pickImageFile(Boolean allowMultiple, Boolean localOnly)
   ```
   Example
   ```Java
-  
+  startActivityForResult(FileIntents.from(this).fileChooser().build(), RequestTag.FILE_CHOOSE);
   ```
 * ### GalleryIntents
   ```Java
@@ -133,37 +139,61 @@ startActivity(SettingIntents.from(this).applicationSetting().build());
   ```Java
   startActivityForResult(GalleryIntents.from(this).pickImage().build(), RequestTag.PICK_IMAGE);
   ```
-* ### GeoIntents
+* ### MapIntents
   ```Java
-  
+  locationOf(String address, String placeTitle)
+  locationOf(float latitude, float longitude)
+  locationOf(float latitude, float longitude, String placeName)
+  navigateTo(String address)
+  navigateTo(float latitude, float longitude)
+  streetViewOf(float latitude, float longitude)
+  streetViewOf(float latitude, float longitude, float zoom)
+  streetViewOf(float latitude, float longitude, float zoom, int mapZoom)
+  showLocationServices()
   ```
   Example
   ```Java
-  
+  MapIntents.from(this).locationOf("Champ de Mars, Avenue Anatole France, Paris, France", "Eiffel Tower").show();
   ```
 * ### MarketIntents
   ```Java
-  
+  showThisAppInMarket()
+  showThisAppInGooglePlay()
+  showThisAppInAmazon()
+  showInMarket(String packageName)
+  showInGooglePlay(String packageName)
+  showInAmazon(String packageName)
+  showGooglePlay()
+  searchAppInGooglePlay(String appName)
   ```
   Example
   ```Java
-  
+  MarketIntents.from(this).showInMarket("com.instagram.android").show();
   ```
 * ### MediaIntents
   ```Java
-  
+  playAudio(String url)
+  showImage(String url)
+  playVideo(String url)
+  playYouTubeVideo(String videoId)
   ```
   Example
   ```Java
-  
+  MediaIntents.from(this).playYouTubeVideo("gOzdLhJG2EQ").show();
   ```
 * ### MessagingIntents
   ```Java
-  
+  openMessages()
+  createEmptySms()
+  createEmptySms(String phoneNumber)
+  createEmptySms(String[] phoneNumbers)
+  createSms(String body)
+  createSms(String body, String phoneNumber)
+  createSms(String body, String[] phoneNumbers)
   ```
   Example
   ```Java
-  
+  MessagingIntents.from(this).createEmptySms().show();
   ```
 * ### MusicIntents
   ```Java
