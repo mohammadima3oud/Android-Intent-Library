@@ -306,13 +306,21 @@ startActivity(SettingIntents.from(this).applicationSetting().build());
   startActivityForResult(VoiceRecorderIntents.from(this).openVoiceRecorder().build(), RequestTag.RECORD_VOICE);
   ```
   
-Note: some intents will return data, which should be handeled in onActivityResult, use .build and startActivityForResult for them.
+FAQ
+---
+**some intents will return data, which should be handeled in onActivityResult, use .build and startActivityForResult for them.**
   Example
   ```Java
   startActivityForResult(VoiceRecorderIntents.from(this).openVoiceRecorder().build(), RequestTag.RECORD_VOICE);
   ```
   
-Note: Android-Intent-Library doesn't handle the returned data, you need to handle them your self in onActivityResult.
+**Android-Intent-Library doesn't handle the returned data, you need to handle them your self in onActivityResult.**
+
+
+Changelog
+---------
+* **1.0.0**
+    * Initial release
 
 
 License
