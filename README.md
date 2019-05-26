@@ -1,4 +1,6 @@
 # Android-Intent-Library
+A library which will save you a lot of time from writing the same intent creation code. it consist of many intent creation codes like Share, Contacts, Email and etc,  which you can easily use.
+
 
 ## How to include
 Add the repository to your project **build.gradle**:
@@ -306,8 +308,7 @@ startActivity(SettingIntents.from(this).applicationSetting().build());
   startActivityForResult(VoiceRecorderIntents.from(this).openVoiceRecorder().build(), RequestTag.RECORD_VOICE);
   ```
   
-FAQ
----
+## FAQ
 **some intents will return data, which should be handeled in onActivityResult, use .build and startActivityForResult for them.**
   Example
   ```Java
@@ -317,14 +318,12 @@ FAQ
 **Android-Intent-Library doesn't handle the returned data, you need to handle them your self in onActivityResult.**
 
 
-Changelog
----------
+## Changelog
 * **1.0.0**
     * Initial release
 
 
-License
--------
+## License
 
     Copyright 2019 ma3udmohammadi
 
