@@ -1,5 +1,7 @@
 [![Android Arsenal]( https://img.shields.io/badge/Android%20Arsenal-Android--Intent--Library-green.svg?style=flat )]( https://android-arsenal.com/details/1/7687 )
 [![JitPack](https://img.shields.io/github/tag/asyl/ArcAnimator.svg?label=maven)](https://jitpack.io/#ma3udmohammadi/Android-Intent-Library)
+[![License](https://img.shields.io/badge/License-Apache%202.0-blue.svg)](http://www.apache.org/licenses/LICENSE-2.0)
+[![API](https://img.shields.io/badge/API-19%2B-brightgreen.svg?style=flat)](https://android-arsenal.com/api?level=19)
 
 # Android-Intent-Library
 A library which will save you a lot of time from writing the same intent creation code. it consist of many intent creation codes like Share, Contacts, Email and etc,  which you can easily use.
