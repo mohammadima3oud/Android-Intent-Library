@@ -34,7 +34,9 @@ A library which will save you a lot of time from writing the same intent creatio
 * [Usage](#usage)
 * [List of Intents](#list-of-intents)
 * [FAQ](#faq)
+* [Hall of Fame](#hall-of-fame)
 * [Changelog](#changelog)
+* [Contribution](#contribution)
 * [License](#license)
 
 ## How to include
