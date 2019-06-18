@@ -3,6 +3,16 @@
 [![JitPack](https://img.shields.io/github/tag/asyl/ArcAnimator.svg?label=maven)](https://jitpack.io/#ma3udmohammadi/Android-Intent-Library)
 [![License](https://img.shields.io/badge/License-Apache%202.0-blue.svg)](http://www.apache.org/licenses/LICENSE-2.0)
 [![API](https://img.shields.io/badge/API-19%2B-brightgreen.svg?style=flat)](https://android-arsenal.com/api?level=19)
+<!---[![Donate](https://img.shields.io/badge/Donate-PayPal-blue.svg)](https://paypal.me/ma3udmohammadi)--->
+![Made With Java](https://img.shields.io/badge/Made%20With-Java-blue.svg?style=for-the-badge&logo=java)
+![Build With Love](https://img.shields.io/badge/Build%20With-%E2%9D%A4-red.svg?style=for-the-badge)
+
+![GitHub followers](https://img.shields.io/github/followers/ma3udmohammadi.svg?style=social)
+![GitHub forks](https://img.shields.io/github/forks/ma3udmohammadi/Android-Intent-Library.svg?style=social)
+![GitHub stars](https://img.shields.io/github/stars/ma3udmohammadi/Android-Intent-Library.svg?style=social)
+![GitHub watchers](https://img.shields.io/github/watchers/ma3udmohammadi/Android-Intent-Library.svg?style=social)
+
+[![Tweet](https://img.shields.io/twitter/url/http/shields.io.svg?style=social)](https://twitter.com/intent/tweet?url=https://github.com/ma3udmohammadi/Android-Intent-Library/)
 
 # Android-Intent-Library
 A library which will save you a lot of time from writing the same intent creation code. it consist of many intent creation codes like Share, Contacts, Email and etc,  which you can easily use.
@@ -39,7 +49,7 @@ A library which will save you a lot of time from writing the same intent creatio
 * [Contribution](#contribution)
 * [License](#license)
 
-## How to include
+## 💻How to include
 Add the repository to your project **build.gradle**:
 
 ```Gradle
@@ -58,7 +68,7 @@ dependencies {
 }
 ```
 
-## Usage
+## 📄Usage
 ### Showing the intent immediately
 
 
@@ -74,7 +84,7 @@ startActivity(SettingIntents.from(this).setting().build());
 startActivity(SettingIntents.from(this).applicationSetting().build());
 ```
 
-## List of Intents
+## 📄List of Intents
 * ### AlarmIntents
   ```Java
   openAlarms()
@@ -345,7 +355,7 @@ startActivity(SettingIntents.from(this).applicationSetting().build());
   startActivityForResult(VoiceRecorderIntents.from(this).openVoiceRecorder().build(), RequestTag.RECORD_VOICE);
   ```
   
-## FAQ
+## ❓FAQ
 **some intents will return data, which should be handeled in onActivityResult, use .build and startActivityForResult for them.**
   Example
   ```Java
@@ -354,7 +364,24 @@ startActivity(SettingIntents.from(this).applicationSetting().build());
   
 **Android-Intent-Library doesn't handle the returned data, you need to handle them your self in onActivityResult.**
 
-## Hall of Fame
+<!---
+## 💰 Donations
+
+This project needs you! If you would like to support this project's further development, the creator of this project or the continuous maintenance of this project, feel free to donate. Your donation is highly appreciated (and I love food, coffee and beer). Thank you!
+
+**PayPal**
+
+* **[Donate $5](https://www.paypal.me/ma3udmohammadi/5)**: Thank's for creating this project, here's a tea (or some juice) for you!
+* **[Donate $10](https://www.paypal.me/ma3udmohammadi/10)**: Wow, I am stunned. Let me take you to the movies!
+* **[Donate $15](https://www.paypal.me/ma3udmohammadi/15)**: I really appreciate your work, let's grab some lunch!
+* **[Donate $25](https://www.paypal.me/ma3udmohammadi/25)**: That's some awesome stuff you did right there, dinner is on me!
+* **[Donate $50](https://www.paypal.me/ma3udmohammadi/50)**: I really really want to support this project, great job!
+* **[Donate $100](https://www.paypal.me/ma3udmohammadi/100)**: You are the man! This project saved me hours (if not days) of struggle and hard work, simply awesome!
+* **[Donate $2799](https://www.paypal.me/ma3udmohammadi/2799)**: Go buddy, buy Macbook Pro for yourself!
+
+Of course, you can also choose what you want to donate, all donations are awesome!
+--->
+## 📄Hall of Fame
 <!---
 <table>
     <tbody>
@@ -371,13 +398,20 @@ startActivity(SettingIntents.from(this).applicationSetting().build());
 --->
 > Using Android-Intent-Library in your app and want it to get listed here? Email me at: ma3udmohammadi@gmail.com
 
-## Changelog
+## 📄Changelog
 See the [CHANGELOG.md](CHANGELOG.md) file.
 
-## Contribution
+## 👍Contribution
 See the [CONTRIBUTING.md](CONTRIBUTING.md) file.
 
-## License
+<!---
+## 👨Developed By
+<a href="https://stackoverflow.com/users/3142608/masoud-mohammadi"><img src="https://github.com/manojbhadane/Social-Icons/blob/master/stackoverflow-icon.png?raw=true" width="60"></a>
+<a href="https://twitter.com/masoud-mohammadi"><img src="https://github.com/manojbhadane/Social-Icons/blob/master/twitter-icon.png?raw=true" width="60"></a>
+<a href="https://in.linkedin.com/in/masoud-mohammadi"><img src="https://github.com/manojbhadane/Social-Icons/blob/master/linkedin-icon.png?raw=true" width="60"></a>
+--->
+
+## 📃License
     Copyright 2019 ma3udmohammadi
 
     Licensed under the Apache License, Version 2.0 (the "License");
