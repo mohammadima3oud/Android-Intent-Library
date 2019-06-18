@@ -9,7 +9,13 @@ A library which will save you a lot of time from writing the same intent creatio
 
 ## Contents
 
+* [How to include](#how-to-include)
+* [Usage](#usage)
+* [List of Intents](#list-of-intents)
+* [FAQ](#faq)
+* [Changelog](#changelog)
 * [License](#license)
+
 ## How to include
 Add the repository to your project **build.gradle**:
 
