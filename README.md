@@ -7,7 +7,9 @@
 # Android-Intent-Library
 A library which will save you a lot of time from writing the same intent creation code. it consist of many intent creation codes like Share, Contacts, Email and etc,  which you can easily use.
 
+## Contents
 
+* [License](#license)
 ## How to include
 Add the repository to your project **build.gradle**:
 
