@@ -371,8 +371,6 @@ startActivity(SettingIntents.from(this).applicationSetting().build());
 
 ## Changelog
 See the [CHANGELOG.md](CHANGELOG.md) file.
-* **1.0.0**
-    * Initial release
 
 ## Contribution
 See the [CONTRIBUTING.md](CONTRIBUTING.md) file.
