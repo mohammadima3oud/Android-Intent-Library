@@ -7,8 +7,29 @@
 # Android-Intent-Library
 A library which will save you a lot of time from writing the same intent creation code. it consist of many intent creation codes like Share, Contacts, Email and etc,  which you can easily use.
 
+<!--- 
+    <table>
+	<tbody>
+		<tr>
+			<td align="center">AllIntents</td>
+			<td align="center">SettingIntent</td>
+            <td align="center">DialIntent</td>
+		</tr>
+		<tr>
+			<td align="center">
+				<img src="" width="341" height="326"/>
+			</td>
+			<td align="center">
+				<img src="" width="341" height="326"/>
+			</td>
+			<td align="center">
+				<img src="" width="341" height="326"/>
+			</td>
+		</tr>
+	</tbody>
+</table>
+--->
 ## Contents
-
 * [How to include](#how-to-include)
 * [Usage](#usage)
 * [List of Intents](#list-of-intents)
@@ -331,14 +352,32 @@ startActivity(SettingIntents.from(this).applicationSetting().build());
   
 **Android-Intent-Library doesn't handle the returned data, you need to handle them your self in onActivityResult.**
 
+## Hall of Fame
+<!---
+<table>
+    <tbody>
+        <tr>
+            <td align="center">
+                <a href="https://play.google.com/store/apps/details?id=com.arthurivanets.owly">
+	                <img src="https://lh3.googleusercontent.com/FHaz_qNghV02MpQBEnR4K3yVGsbS_0qcUsEHidzfujI3V01zyLp6yo7oK0-ymILdRk9k=s360" width="70" height="70"/>
+                </a>
+            </td>
+            <td align="center"><b>Owly</b></td>
+        </tr>
+    </tbody>
+</table>
+--->
+> Using Android-Intent-Library in your app and want it to get listed here? Email me at: ma3udmohammadi@gmail.com
 
 ## Changelog
+See the [CHANGELOG.md](CHANGELOG.md) file.
 * **1.0.0**
     * Initial release
 
+## Contribution
+See the [CONTRIBUTING.md](CONTRIBUTING.md) file.
 
 ## License
-
     Copyright 2019 ma3udmohammadi
 
     Licensed under the Apache License, Version 2.0 (the "License");
