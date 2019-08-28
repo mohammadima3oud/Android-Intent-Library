@@ -1,18 +1,18 @@
 [![platform](https://img.shields.io/badge/platform-android-green.svg )](http://developer.android.com/index.html)
 [![Android Arsenal]( https://img.shields.io/badge/Android%20Arsenal-Android--Intent--Library-green.svg?style=flat )]( https://android-arsenal.com/details/1/7687 )
-[![JitPack](https://img.shields.io/github/tag/asyl/ArcAnimator.svg?label=maven)](https://jitpack.io/#ma3udmohammadi/Android-Intent-Library)
+[![JitPack](https://img.shields.io/github/tag/asyl/ArcAnimator.svg?label=maven)](https://jitpack.io/#mohammadima3oud/Android-Intent-Library)
 [![License](https://img.shields.io/badge/License-Apache%202.0-blue.svg)](http://www.apache.org/licenses/LICENSE-2.0)
 [![API](https://img.shields.io/badge/API-19%2B-brightgreen.svg?style=flat)](https://android-arsenal.com/api?level=19)
-<!---[![Donate](https://img.shields.io/badge/Donate-PayPal-blue.svg)](https://paypal.me/ma3udmohammadi)--->
+[![Donate](https://img.shields.io/badge/Donate-PayPal-blue.svg)](https://paypal.me/mohammadima3oud)
 ![Made With Java](https://img.shields.io/badge/Made%20With-Java-blue.svg?style=for-the-badge&logo=java)
 ![Build With Love](https://img.shields.io/badge/Build%20With-%E2%9D%A4-red.svg?style=for-the-badge)
 
-![GitHub followers](https://img.shields.io/github/followers/ma3udmohammadi.svg?style=social)
-![GitHub forks](https://img.shields.io/github/forks/ma3udmohammadi/Android-Intent-Library.svg?style=social)
-![GitHub stars](https://img.shields.io/github/stars/ma3udmohammadi/Android-Intent-Library.svg?style=social)
-![GitHub watchers](https://img.shields.io/github/watchers/ma3udmohammadi/Android-Intent-Library.svg?style=social)
+![GitHub followers](https://img.shields.io/github/followers/mohammadima3oud.svg?style=social)
+![GitHub forks](https://img.shields.io/github/forks/mohammadima3oud/Android-Intent-Library.svg?style=social)
+![GitHub stars](https://img.shields.io/github/stars/mohammadima3oud/Android-Intent-Library.svg?style=social)
+![GitHub watchers](https://img.shields.io/github/watchers/mohammadima3oud/Android-Intent-Library.svg?style=social)
 
-[![Tweet](https://img.shields.io/twitter/url/http/shields.io.svg?style=social)](https://twitter.com/intent/tweet?url=https://github.com/ma3udmohammadi/Android-Intent-Library/)
+[![Tweet](https://img.shields.io/twitter/url/http/shields.io.svg?style=social)](https://twitter.com/intent/tweet?url=https://github.com/mohammadima3oud/Android-Intent-Library/)
 
 # Android-Intent-Library
 A library which will save you a lot of time from writing the same intent creation code. it consist of many intent creation codes like Share, Contacts, Email and etc,  which you can easily use.
@@ -371,13 +371,13 @@ This project needs you! If you would like to support this project's further deve
 
 **PayPal**
 
-* **[Donate $5](https://www.paypal.me/ma3udmohammadi/5)**: Thank's for creating this project, here's a tea (or some juice) for you!
-* **[Donate $10](https://www.paypal.me/ma3udmohammadi/10)**: Wow, I am stunned. Let me take you to the movies!
-* **[Donate $15](https://www.paypal.me/ma3udmohammadi/15)**: I really appreciate your work, let's grab some lunch!
-* **[Donate $25](https://www.paypal.me/ma3udmohammadi/25)**: That's some awesome stuff you did right there, dinner is on me!
-* **[Donate $50](https://www.paypal.me/ma3udmohammadi/50)**: I really really want to support this project, great job!
-* **[Donate $100](https://www.paypal.me/ma3udmohammadi/100)**: You are the man! This project saved me hours (if not days) of struggle and hard work, simply awesome!
-* **[Donate $2799](https://www.paypal.me/ma3udmohammadi/2799)**: Go buddy, buy Macbook Pro for yourself!
+* **[Donate $5](https://www.paypal.me/mohammadima3oud/5)**: Thank's for creating this project, here's a tea (or some juice) for you!
+* **[Donate $10](https://www.paypal.me/mohammadima3oud/10)**: Wow, I am stunned. Let me take you to the movies!
+* **[Donate $15](https://www.paypal.me/mohammadima3oud/15)**: I really appreciate your work, let's grab some lunch!
+* **[Donate $25](https://www.paypal.me/mohammadima3oud/25)**: That's some awesome stuff you did right there, dinner is on me!
+* **[Donate $50](https://www.paypal.me/mohammadima3oud/50)**: I really really want to support this project, great job!
+* **[Donate $100](https://www.paypal.me/mohammadima3oud/100)**: You are the man! This project saved me hours (if not days) of struggle and hard work, simply awesome!
+* **[Donate $2799](https://www.paypal.me/mohammadima3oud/2799)**: Go buddy, buy Macbook Pro for yourself!
 
 Of course, you can also choose what you want to donate, all donations are awesome!
 --->
@@ -412,7 +412,7 @@ See the [CONTRIBUTING.md](CONTRIBUTING.md) file.
 --->
 
 ## 📃License
-    Copyright 2019 ma3udmohammadi
+    Copyright 2019 mohammadima3oud
 
     Licensed under the Apache License, Version 2.0 (the "License");
     you may not use this file except in compliance with the License.
