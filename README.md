@@ -64,7 +64,7 @@ And add the library to your module **build.gradle**:
 
 ```Gradle
 dependencies {
-    implementation 'com.github.ma3udmohammadi:Android-Intent-Library:1.0.0'
+    implementation 'com.github.mohammadima3oud:Android-Intent-Library:1.0.0'
 }
 ```
 
